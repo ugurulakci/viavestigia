@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Istanbul: The Water City Few Know — Cisterns, Aqueducts & Hammam Tour</title>
+  <meta name="description" content="Descend beneath Istanbul's streets to explore hidden cisterns, Byzantine aqueducts, Ottoman hammams and the Grand Bazaar with licensed guide Uğur M. Ulakci. Small group, max 6 people. Book on Viator." />
+  <meta name="keywords" content="Istanbul water tour, hidden cistern Istanbul, Istanbul hammam tour, aqueduct tour Istanbul, Grand Bazaar tour, small group Istanbul, licensed guide Istanbul" />
+  <link rel="canonical" href="https://ugurulakci.github.io/viavestigia/water-city-tour" />
+  <meta property="og:title" content="Istanbul: The Water City Few Know" />
+  <meta property="og:description" content="Follow the hidden waterways that kept empires alive. Cisterns, aqueducts, hammams & the Grand Bazaar — max 6 people, licensed guide." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="basilica-cistern-istanbul.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
+    "name": "Istanbul: The Water City Few Know — Cisterns, Aqueducts & Hammam",
+    "description": "An immersive small-group walking tour following Istanbul's hidden water heritage — hidden cisterns, Byzantine aqueducts, Ottoman hammams, and Grand Bazaar artisan traditions.",
+    "provider": {
+      "@type": "Person",
+      "name": "Uğur M. Ulakci",
+      "jobTitle": "Licensed Tourist Guide",
+      "url": "https://ugurulakci.github.io/viavestigia"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://www.viator.com/search/5512166P8?mcid=70066",
+      "priceCurrency": "USD",
+      "price": "75",
+      "availability": "https://schema.org/InStock"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "12"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #1a1410;
+      --parchment: #f5f0e8;
+      --stone: #8c7b6b;
+      --deep-water: #0d2235;
+      --cistern: #1b3d52;
+      --gold: #c9a96e;
+      --gold-light: #e8d5a3;
+      --rust: #8b3a2a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--parchment); color: var(--ink); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+    /* STICKY BAR */
+    .sticky-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--deep-water);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 32px;
+      transform: translateY(-100%); transition: transform 0.4s ease;
+    }
+    .sticky-bar.visible { transform: translateY(0); }
+    .sticky-bar-text { color: var(--gold-light); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; }
+    .sticky-bar .btn-book { background: var(--gold); color: var(--deep-water); padding: 8px 24px; font-size: 12px; letter-spacing: 0.15em; font-weight: 500; }
+
+    /* HERO */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg-img {
+      position: absolute; inset: 0;
+      background-image: url('basilica-cistern-istanbul.jpg');
+      background-size: cover; background-position: center 30%;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(180deg, rgba(13,34,53,0.3) 0%, rgba(13,34,53,0.6) 50%, rgba(13,34,53,0.92) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 48px 80px; max-width: 780px;
+      animation: fade-up 1.2s ease forwards;
+    }
+    @keyframes fade-up { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+
+    .hero-eyebrow {
+      display: inline-block; color: var(--gold); font-size: 11px;
+      letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 24px;
+      border-left: 2px solid var(--gold); padding-left: 12px;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 7vw, 88px); font-weight: 300;
+      color: var(--parchment); line-height: 1.05; margin-bottom: 8px;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 2.2vw, 21px); color: rgba(245,240,232,0.7);
+      font-style: italic; margin-bottom: 36px;
+    }
+    .hero-meta { display: flex; gap: 32px; margin-bottom: 16px; flex-wrap: wrap; }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); opacity: 0.8; }
+    .meta-value { font-size: 14px; color: var(--parchment); font-weight: 400; }
+    .hero-price {
+      display: inline-block; margin-bottom: 32px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; color: var(--gold-light);
+    }
+    .hero-price span { font-size: 13px; font-family: 'Jost', sans-serif; opacity: 0.7; margin-left: 4px; }
+    .hero-cta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+
+    .btn-book {
+      display: inline-block; background: var(--gold); color: var(--deep-water);
+      text-decoration: none; padding: 16px 40px;
+      font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      transition: all 0.3s ease; position: relative; overflow: hidden;
+    }
+    .btn-book::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,0.15); transform: translateX(-100%); transition: transform 0.3s ease;
+    }
+    .btn-book:hover::before { transform: translateX(0); }
+    .btn-book:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,169,110,0.4); }
+    .btn-secondary {
+      color: rgba(245,240,232,0.7); font-size: 13px; letter-spacing: 0.1em;
+      text-decoration: none; border-bottom: 1px solid rgba(245,240,232,0.3);
+      padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-secondary:hover { color: var(--gold-light); border-color: var(--gold); }
+
+    /* TRUST BAR */
+    .trust-bar {
+      background: var(--ink); padding: 20px 48px;
+      display: flex; gap: 40px; align-items: center; justify-content: center; flex-wrap: wrap;
+    }
+    .trust-item { display: flex; align-items: center; gap: 10px; color: var(--gold-light); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    /* SECTIONS */
+    section { padding: 96px 48px; }
+    .section-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--stone); margin-bottom: 16px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 300; line-height: 1.15; color: var(--deep-water); }
+    .section-title em { font-style: italic; color: var(--rust); }
+
+    /* INTRO */
+    .intro { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .intro-body { font-size: 17px; line-height: 1.85; color: #3a3028; margin-top: 28px; }
+    .intro-body p + p { margin-top: 20px; }
+    .intro-pull {
+      font-family: 'Cormorant Garamond', serif; font-size: 26px; font-style: italic;
+      color: var(--cistern); border-left: 3px solid var(--gold); padding-left: 24px;
+      margin: 40px 0; line-height: 1.5;
+    }
+    .intro-frame {
+      position: relative; overflow: hidden;
+      aspect-ratio: 3/4;
+    }
+    .intro-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .intro-frame-border {
+      position: absolute; inset: 12px;
+      border: 1px solid rgba(201,169,110,0.4); pointer-events: none;
+    }
+    .intro-caption { margin-top: 14px; font-size: 12px; color: var(--stone); letter-spacing: 0.08em; text-align: center; }
+
+    /* PHOTO STRIP */
+    .photo-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .photo-strip-item { overflow: hidden; aspect-ratio: 4/3; }
+    .photo-strip-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .photo-strip-item:hover img { transform: scale(1.04); }
+
+    /* ITINERARY */
+    .itinerary-section { background: var(--deep-water); color: var(--parchment); }
+    .itinerary-section .section-title { color: var(--parchment); }
+    .itinerary-section .section-label { color: var(--gold); opacity: 0.7; }
+    .itinerary-inner { max-width: 1100px; margin: 0 auto; }
+    .itinerary-header { margin-bottom: 64px; }
+    .stops { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .stop {
+      padding: 40px; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,169,110,0.1);
+      position: relative; overflow: hidden; transition: background 0.3s; cursor: default;
+    }
+    .stop:hover { background: rgba(201,169,110,0.05); }
+    .stop::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0;
+      background: var(--gold); transition: height 0.4s ease;
+    }
+    .stop:hover::before { height: 100%; }
+    .stop-number { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; color: rgba(201,169,110,0.12); position: absolute; top: 12px; right: 24px; line-height: 1; }
+    .stop-era { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 12px; }
+    .stop-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--parchment); margin-bottom: 12px; }
+    .stop-desc { font-size: 14px; line-height: 1.7; color: rgba(245,240,232,0.55); font-weight: 300; }
+
+    /* REVIEW */
+    .review-section { background: var(--parchment); }
+    .review-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .review-stars { display: flex; justify-content: center; gap: 6px; margin-bottom: 32px; }
+    .star { width: 18px; height: 18px; fill: var(--gold); }
+    .review-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 3vw, 34px); font-style: italic; font-weight: 300; color: var(--deep-water); line-height: 1.5; margin-bottom: 32px; }
+    .review-author { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone); }
+    .viator-badge { background: var(--ink); color: var(--gold-light); padding: 3px 10px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+
+    /* DETAILS */
+    .details-section { background: #f0ebe0; }
+    .details-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .details-list { margin-top: 40px; list-style: none; }
+    .details-list li { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(140,123,107,0.2); font-size: 15px; line-height: 1.5; }
+    .details-list li:first-child { border-top: 1px solid rgba(140,123,107,0.2); }
+    .detail-icon { flex-shrink: 0; width: 20px; margin-top: 2px; }
+    .detail-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone); margin-bottom: 4px; }
+    .detail-value { color: var(--ink); font-weight: 400; }
+
+    /* GUIDE */
+    .guide-box { background: var(--deep-water); padding: 48px; color: var(--parchment); }
+    .guide-tag { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; opacity: 0.8; }
+    .guide-name { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; margin-bottom: 20px; }
+    .guide-bio { font-size: 14px; line-height: 1.8; color: rgba(245,240,232,0.65); margin-bottom: 32px; }
+    .guide-credentials { display: flex; flex-direction: column; gap: 12px; }
+    .credential { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--gold-light); }
+    .credential-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+    /* GUIDE PHOTO */
+    .guide-photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: center top; margin-bottom: 0; display: block; }
+
+    /* FINAL CTA */
+    .final-cta {
+      background: var(--ink); text-align: center; padding: 120px 48px;
+      position: relative; overflow: hidden;
+    }
+    .final-cta::before {
+      content: 'ISTANBUL'; position: absolute;
+      font-family: 'Cormorant Garamond', serif; font-size: 200px; font-weight: 300;
+      color: rgba(255,255,255,0.02); top: 50%; left: 50%;
+      transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none;
+    }
+    .final-cta-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .final-cta .section-label { color: var(--gold); opacity: 0.7; }
+    .final-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 60px); font-weight: 300; color: var(--parchment); margin: 16px 0 24px; line-height: 1.2; }
+    .final-cta h2 em { font-style: italic; color: var(--gold-light); }
+    .final-cta p { color: rgba(245,240,232,0.55); font-size: 15px; line-height: 1.7; margin-bottom: 48px; }
+    .final-cta .btn-book { font-size: 14px; padding: 20px 60px; }
+    .availability-note { margin-top: 20px; font-size: 12px; color: rgba(245,240,232,0.35); letter-spacing: 0.08em; }
+
+    /* FOOTER */
+    footer { background: var(--deep-water); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--gold-light); font-style: italic; }
+    .footer-tagline { font-size: 11px; color: rgba(245,240,232,0.35); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 4px; }
+    .footer-links { display: flex; gap: 32px; flex-wrap: wrap; }
+    .footer-links a { color: rgba(245,240,232,0.45); text-decoration: none; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      section { padding: 64px 24px; }
+      .hero-content { padding: 0 24px 64px; }
+      .trust-bar { padding: 20px 24px; gap: 20px; }
+      .intro { grid-template-columns: 1fr; gap: 40px; }
+      .intro-visual { display: none; }
+      .stops { grid-template-columns: 1fr; }
+      .details-inner { grid-template-columns: 1fr; gap: 40px; }
+      .photo-strip { grid-template-columns: 1fr 1fr; }
+      .photo-strip-item:last-child { display: none; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .sticky-bar { padding: 12px 20px; }
+      .sticky-bar-text { display: none; }
+      .final-cta { padding: 80px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STICKY BAR -->
+  <div class="sticky-bar" id="stickyBar">
+    <span class="sticky-bar-text">Istanbul: The Water City Few Know</span>
+    <a href="https://www.viator.com/search/5512166P8?mcid=70066" target="_blank" rel="noopener" class="btn-book">Book Now →</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-img"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Istanbul Walking Tour · Licensed Guide · Max 6 People</span>
+      <h1>Istanbul:<br><em>The Water City</em><br>Few Know</h1>
+      <p class="hero-subtitle">Cisterns, Aqueducts, Hammams & the Grand Bazaar — Roman to Ottoman</p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Duration</span>
+          <span class="meta-value">~3.5 Hours</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Group Size</span>
+          <span class="meta-value">Max 6 People</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Language</span>
+          <span class="meta-value">English</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Rating</span>
+          <span class="meta-value">★★★★★ Viator</span>
+        </div>
+      </div>
+      <div class="hero-price">From $75 <span>per person</span></div>
+      <div class="hero-cta">
+        <a href="https://www.viator.com/search/5512166P8?mcid=70066" target="_blank" rel="noopener" class="btn-book">Book Now on Viator →</a>
+        <a href="#itinerary" class="btn-secondary">See what's included ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-item">✦ Licensed Tourist Guide</div>
+    <div class="trust-item">✦ Small Group · Max 6</div>
+    <div class="trust-item">✦ Secure Booking via Viator</div>
+    <div class="trust-item">✦ Free Cancellation Available</div>
+  </div>
+
+  <!-- INTRO -->
+  <section>
+    <div class="intro">
+      <div class="intro-text">
+        <p class="section-label">The Experience</p>
+        <h2 class="section-title">Beneath the city,<br>empires <em>left their mark</em><br>in water</h2>
+        <div class="intro-body">
+          <p>Most visitors see Istanbul's domes and minarets. Few descend beneath the streets — into vaulted chambers, moss-covered columns, and still dark pools that kept three empires alive.</p>
+          <div class="intro-pull">"What if the story of Istanbul was written in water?"</div>
+          <p>On this intimate walking tour, you'll follow the city's hydraulic heritage from Roman engineers to Byzantine emperors to Ottoman architects — each civilization inheriting, adapting, and beautifying what came before. Ending with the living artisan culture of the Grand Bazaar.</p>
+          <p>Ottoman şerbet tastings and Turkish coffee included along the way.</p>
+        </div>
+      </div>
+      <div class="intro-visual">
+        <div class="intro-frame">
+          <img src="ottoman-hammam-istanbul.png" alt="Ottoman hammam interior with star-studded dome" loading="lazy" />
+          <div class="intro-frame-border"></div>
+        </div>
+        <p class="intro-caption">Zeyrek Çinili Hamam — 16th century, recently restored</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO STRIP -->
+  <div style="padding: 0 0 4px; background: var(--parchment);">
+    <div class="photo-strip">
+      <div class="photo-strip-item">
+        <img src="basilica-cistern-istanbul.jpg" alt="Basilica Cistern columns and water" loading="lazy" />
+      </div>
+      <div class="photo-strip-item">
+        <img src="C_inili_Hamam__Zeyrek_.jpg" alt="Ottoman şerbet tasting" loading="lazy" />
+      </div>
+      <div class="photo-strip-item">
+        <img src="su_leymaniye_terrace.jpg" alt="Istanbul panorama from Süleymaniye terrace" loading="lazy" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ITINERARY -->
+  <section class="itinerary-section" id="itinerary">
+    <div class="itinerary-inner">
+      <div class="itinerary-header">
+        <p class="section-label">What You'll See</p>
+        <h2 class="section-title">Four layers of history.<br>One city's <em>obsession with water.</em></h2>
+      </div>
+      <div class="stops">
+        <div class="stop">
+          <div class="stop-number">01</div>
+          <div class="stop-era">Roman · Underground</div>
+          <h3 class="stop-name">A Hidden Cistern</h3>
+          <p class="stop-desc">Not the famous one. A lesser-known Roman cistern, quiet and largely unseen — still carrying the weight of the empire that built it. This is where the tour begins: below the surface, before the crowds.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-number">02</div>
+          <div class="stop-era">Byzantine · 4th Century</div>
+          <h3 class="stop-name">Valens Aqueduct</h3>
+          <p class="stop-desc">Walk beneath Constantinople's great water highway — a towering double-tiered aqueduct that carried water from Thrace over 120 km. One of the longest aqueduct systems of the ancient world, still standing in the middle of modern Istanbul.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-number">03</div>
+          <div class="stop-era">Ottoman · 1584</div>
+          <h3 class="stop-name">Historic Hammam</h3>
+          <p class="stop-desc">Designed by Mimar Sinan — where water ritual became architecture. Understand how the hammam shaped daily life, faith, and social culture for five centuries. Optional full hammam ritual available.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-number">04</div>
+          <div class="stop-era">Ottoman · Living Heritage</div>
+          <h3 class="stop-name">Grand Bazaar Artisans</h3>
+          <p class="stop-desc">Beyond the tourist lanes, the bazaar still breathes. Meet the craftspeople — coppersmiths, weavers, restorers — whose traditions stretch back to the same Ottoman centuries as the hammams and aqueducts above them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEW -->
+  <section class="review-section">
+    <div class="review-inner">
+      <p class="section-label">What Travelers Say</p>
+      <div class="review-stars">
+        <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <blockquote class="review-quote">
+        "There are a million options to go to all the standard sites — but this tour is truly unique. Uğur is passionate and knowledgeable, and we felt very well taken care of throughout."
+      </blockquote>
+      <p class="review-author">davey_w · July 2025</p>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:10px;align-items:center;">
+        <span class="viator-badge">Viator</span>
+        <span style="color:var(--stone);font-size:12px;">Verified Review</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section class="details-section">
+    <div class="details-inner">
+      <div>
+        <p class="section-label">Tour Details</p>
+        <h2 class="section-title">Everything you<br>need to <em>know</em></h2>
+        <ul class="details-list">
+          <li>
+            <span class="detail-icon">⏱</span>
+            <div><div class="detail-label">Duration</div><div class="detail-value">Approximately 3.5 hours</div></div>
+          </li>
+          <li>
+            <span class="detail-icon">👥</span>
+            <div><div class="detail-label">Group Size</div><div class="detail-value">Maximum 6 participants — intimate by design</div></div>
+          </li>
+          <li>
+            <span class="detail-icon">💰</span>
+            <div><div class="detail-label">Price</div><div class="detail-value">From $75 per person</div></div>
+          </li>
+          <li>
+            <span class="detail-icon">🗣</span>
+            <div><div class="detail-label">Language</div><div class="detail-value">English</div></div>
+          </li>
+          <li>
+            <span class="detail-icon">✓</span>
+            <div><div class="detail-label">Included</div><div class="detail-value">Licensed guide · Ottoman şerbet tasting · Turkish coffee</div></div>
+          </li>
+          <li>
+            <span class="detail-icon">✗</span>
+            <div><div class="detail-label">Not Included</div><div class="detail-value">Optional hammam ritual (available at final stop)</div></div>
+          </li>
+          <li>
+            <span class="detail-icon">📍</span>
+            <div><div class="detail-label">Meeting Point</div><div class="detail-value">Confirmed upon booking via Viator</div></div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <img src="guide-in-action.jpg" alt="Uğur guiding guests at Çemberlitaş Hammam" class="guide-photo" loading="lazy" onerror="this.style.display='none'" />
+        <div class="guide-box">
+          <p class="guide-tag">Your Guide</p>
+          <h3 class="guide-name">Uğur M. Ulakci</h3>
+          <p class="guide-bio">A licensed Istanbul guide with a background in performing arts and academic research in Anatolian history. Uğur built this tour around a single obsession: how three civilizations used water to write the story of one city.</p>
+          <div class="guide-credentials">
+            <div class="credential"><div class="credential-dot"></div>Ministry-licensed tourist guide, Istanbul</div>
+            <div class="credential"><div class="credential-dot"></div>Founder, Via Vestigia — cultural heritage podcast</div>
+            <div class="credential"><div class="credential-dot"></div>Small-group format only — max 6 participants</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <p class="section-label">Ready to Go Beneath?</p>
+      <h2>The city has been<br>hiding this from you.<br><em>Not anymore.</em></h2>
+      <p>Spots fill quickly. Six people maximum means this tour books out days in advance — especially in peak season.</p>
+      <a href="https://www.viator.com/search/5512166P8?mcid=70066" target="_blank" rel="noopener" class="btn-book">Reserve Your Spot on Viator →</a>
+      <p class="availability-note">Secure payment · Free cancellation · Instant confirmation</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-brand">Via Vestigia</div>
+      <div class="footer-tagline">Non terminus, sed ambulatio</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.viator.com/search/5512166P8?mcid=70066" target="_blank" rel="noopener">Book Tour</a>
+      <a href="https://ugurulakci.komi.io" target="_blank" rel="noopener">All Tours</a>
+      <a href="https://open.spotify.com/show/4RaCXmtT1FOKo59qqtcegl?si=PHJ2MhqwSjaEUDXN1jdHjA" target="_blank" rel="noopener">Podcast</a>
+    </div>
+  </footer>
+
+  <script>
+    const stickyBar = document.getElementById('stickyBar');
+    const hero = document.querySelector('.hero');
+    const observer = new IntersectionObserver(([e]) => {
+      stickyBar.classList.toggle('visible', !e.isIntersecting);
+    }, { threshold: 0 });
+    observer.observe(hero);
+
+    const fadeEls = document.querySelectorAll('.stop, .details-list li, .review-quote');
+    const fadeObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      fadeObs.observe(el);
+    });
+  </script>
+</body>
+</html>
