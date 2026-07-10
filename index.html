@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Via Vestigia — Cultural Walking Experiences in Istanbul & the Mediterranean</title>
+<meta name="description" content="Intimate cultural walking experiences across Istanbul and the Mediterranean. Led by Uğur Ulakcı, licensed expert guide. Beginning in Istanbul — expanding across the ancient world.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600;700&family=Alegreya+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:     #2B2420;
+  --forest:  #466D9B;
+  --stone:   #C7BBB0;
+  --ivory:   #F0EAD8;
+  --gold:    #A66C49;
+  --mist:    #E3DACB;
+  --rust:    #717F95;
+  --white:   #ffffff;
+  --f-d: 'Cormorant SC', Georgia, serif;
+  --f-b: 'Alegreya Sans', system-ui, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; }
+
+body {
+  font-family: var(--f-b);
+  background: var(--ivory);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 3rem;
+  background: rgba(43,36,32,.35);
+  backdrop-filter: blur(10px);
+  transition: background .4s var(--ease), padding .4s var(--ease), box-shadow .4s;
+}
+nav.scrolled {
+  background: rgba(247,244,216,.96);
+  backdrop-filter: blur(14px);
+  padding: 1rem 3rem;
+  box-shadow: 0 1px 0 rgba(200,184,154,.25);
+}
+nav.scrolled .nav-wordmark, nav.scrolled .nav-links a { color: var(--forest); }
+nav .nav-wordmark, nav .nav-links a { color: var(--ivory); transition: color .4s var(--ease); }
+.nav-logo { display: flex; align-items: center; gap: .75rem; }
+.nav-emblem { width: 38px; height: 38px; flex-shrink: 0; object-fit: contain; }
+.nav-wordmark { font-family: var(--f-d); font-size: 1.15rem; font-weight: 500; letter-spacing: .08em; color: var(--forest); }
+.nav-wordmark small { font-size: .7em; font-weight: 300; opacity: .7; margin-left: .25rem; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: .78rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); opacity: .65; transition: opacity .2s; }
+.nav-links a:hover { opacity: 1; }
+.nav-actions { display: flex; align-items: center; gap: 1rem; }
+.nav-wa {
+  display: flex; align-items: center; gap: .45rem;
+  font-size: .72rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  color: #25d366; border: 1px solid rgba(37,211,102,.35); padding: .55rem 1rem; border-radius: 2px;
+  transition: background .2s, color .2s;
+}
+.nav-wa:hover { background: #25d366; color: #fff; }
+.nav-wa svg { flex-shrink: 0; }
+.nav-cta {
+  font-size: .75rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--white); background: var(--forest); padding: .65rem 1.4rem; border-radius: 2px;
+  transition: background .2s, transform .2s;
+}
+.nav-cta:hover { background: var(--gold); transform: translateY(-1px); }
+.nav-mobile { display: none; flex-direction: column; gap: 5px; padding: 4px; }
+.nav-mobile span { display: block; width: 22px; height: 1px; background: var(--ink); }
+
+/* ── HERO ── */
+.hero {
+  position: relative; height: 100vh; min-height: 680px;
+  display: flex; align-items: flex-end; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, rgba(26,26,24,.1) 0%, rgba(26,26,24,.72) 100%),
+    url('su_leymaniye_terrace.jpg') center/cover no-repeat;
+  transform: scale(1.06); transition: transform 9s var(--ease);
+}
+.hero-bg.loaded { transform: scale(1); }
+.hero-map-dots {
+  position: absolute; inset: 0; pointer-events: none;
+  opacity: 0; transition: opacity 1.2s ease 1s;
+}
+.hero-map-dots.visible { opacity: 1; }
+.city-dot {
+  position: absolute; cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+.city-dot-ring {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid rgba(200,184,154,.6);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  animation: dotPulse 3s ease-in-out infinite;
+}
+.city-dot-ring::before {
+  content: ''; position: absolute;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid rgba(200,184,154,.25);
+  animation: dotPulse 3s ease-in-out infinite .5s;
+}
+.city-dot-inner { width: 6px; height: 6px; border-radius: 50%; background: var(--stone); }
+.city-dot-label {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  margin-top: .4rem; font-size: .6rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--stone); white-space: nowrap; font-family: var(--f-b);
+}
+.city-dot.future .city-dot-inner { background: rgba(200,184,154,.35); }
+.city-dot.future .city-dot-ring { border-color: rgba(200,184,154,.25); }
+.city-dot.future .city-dot-label { opacity: .5; }
+@keyframes dotPulse {
+  0%, 100% { opacity: .7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+.hero-content {
+  position: relative; padding: 0 3rem 5.5rem; max-width: 800px;
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .9s var(--ease) .4s, transform .9s var(--ease) .4s;
+}
+.hero-content.visible { opacity: 1; transform: translateY(0); }
+.hero-eyebrow {
+  font-size: .68rem; font-weight: 400; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--stone); margin-bottom: 1.25rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 36px; height: 1px; background: var(--stone); }
+.hero-headline {
+  font-family: var(--f-d); font-size: clamp(3rem, 6.5vw, 5.8rem);
+  font-weight: 300; line-height: 1.05; color: var(--white); margin-bottom: 1.5rem; letter-spacing: -.01em;
+}
+.hero-headline em { font-style: italic; color: var(--stone); }
+.hero-sub {
+  font-size: 1.05rem; font-weight: 300; color: rgba(247,244,238,.78);
+  max-width: 520px; margin-bottom: 2.75rem; line-height: 1.72;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .78rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--white); background: var(--forest); padding: 1rem 2rem; border-radius: 2px;
+  transition: background .2s, transform .2s;
+}
+.btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+.btn-primary.wa { background: #25d366; }
+.btn-primary.wa:hover { background: #1aad55; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .78rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(247,244,238,.82); border: 1px solid rgba(247,244,238,.32); padding: 1rem 2rem; border-radius: 2px;
+  transition: border-color .2s, color .2s;
+}
+.btn-ghost:hover { border-color: var(--stone); color: var(--stone); }
+.hero-scroll {
+  position: absolute; bottom: 2rem; right: 3rem;
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(247,244,238,.45);
+}
+.hero-scroll-line {
+  width: 1px; height: 52px;
+  background: linear-gradient(to bottom, rgba(247,244,238,.5), transparent);
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:.4;transform:scaleY(1)} 50%{opacity:.9;transform:scaleY(1.08)} }
+.hero-trust {
+  position: absolute; bottom: 2rem; left: 3rem;
+  display: flex; align-items: center; gap: 1.5rem;
+}
+.trust-item {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .68rem; letter-spacing: .08em; color: rgba(247,244,238,.55);
+}
+.trust-item strong { color: rgba(247,244,238,.85); font-weight: 500; }
+
+/* ── PHILOSOPHY ── */
+.philosophy { background: var(--forest); padding: 4rem 3rem; text-align: center; }
+.philosophy-quote {
+  font-family: var(--f-d); font-size: clamp(1.6rem, 3.8vw, 2.6rem);
+  font-weight: 300; font-style: italic; color: var(--ivory); line-height: 1.3;
+}
+.philosophy-quote span { color: var(--stone); }
+.philosophy-cities {
+  margin-top: 2.5rem; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+}
+.pcity {
+  display: flex; flex-direction: column; align-items: center; gap: .4rem;
+  font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+}
+.pcity-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gold); position: relative;
+}
+.pcity.coming .pcity-dot { background: rgba(200,184,154,.3); border: 1px solid rgba(200,184,154,.4); }
+.pcity-name { color: rgba(247,244,238,.7); }
+.pcity.active .pcity-name { color: var(--stone); }
+.pcity.coming .pcity-name { color: rgba(247,244,238,.35); }
+.pcity-status { font-size: .55rem; color: rgba(247,244,238,.35); letter-spacing: .15em; }
+.pcity.active .pcity-status { color: var(--gold); }
+
+/* ── SECTION DEFAULTS ── */
+.section { padding: 6rem 3rem; }
+.eyebrow {
+  font-size: .68rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+.eyebrow.light { color: var(--stone); }
+.eyebrow.light::before { background: var(--stone); }
+.h2 {
+  font-family: var(--f-d); font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 300; line-height: 1.12; color: var(--forest); margin-bottom: 1.25rem;
+}
+.h2 em { font-style: italic; color: var(--gold); }
+.h2.light { color: var(--ivory); }
+.h2.light em { color: var(--stone); }
+.body-text { font-size: 1rem; font-weight: 300; line-height: 1.78; color: rgba(26,26,24,.68); max-width: 580px; }
+.body-text.light { color: rgba(247,244,238,.62); }
+.link-arrow {
+  font-size: .73rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--forest); display: inline-flex; align-items: center; gap: .5rem;
+  border-bottom: 1px solid var(--stone); padding-bottom: .15rem; transition: color .2s, border-color .2s;
+}
+.link-arrow:hover { color: var(--gold); border-color: var(--gold); }
+.link-arrow.light { color: rgba(247,244,238,.7); border-color: rgba(247,244,238,.3); }
+.link-arrow.light:hover { color: var(--stone); border-color: var(--stone); }
+
+/* ── FLAGSHIP EXPERIENCE ── */
+.flagship { background: var(--white); padding: 0; }
+.flagship-inner { display: grid; grid-template-columns: 1fr 1fr; min-height: 90vh; }
+.flagship-visual { position: relative; overflow: hidden; }
+.flagship-visual img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; transition: transform 12s var(--ease);
+}
+.flagship-visual:hover img { transform: scale(1.04); }
+.flagship-badge {
+  position: absolute; top: 2.5rem; left: 2.5rem;
+  background: var(--forest); color: var(--ivory);
+  font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+  padding: .5rem 1rem; border-radius: 2px;
+}
+.flagship-rating {
+  position: absolute; bottom: 2.5rem; left: 2.5rem; right: 2.5rem;
+  background: rgba(26,26,24,.75); backdrop-filter: blur(12px);
+  border: 1px solid rgba(247,244,238,.12); padding: 1.25rem 1.5rem; border-radius: 4px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.flagship-stars { color: #f5b942; font-size: 1rem; letter-spacing: .05em; }
+.flagship-rating-text { font-size: .78rem; color: rgba(247,244,238,.7); margin-top: .25rem; }
+.flagship-rating-num { font-family: var(--f-d); font-size: 2.2rem; font-weight: 300; color: var(--white); }
+.flagship-content { padding: 5rem 4.5rem; display: flex; flex-direction: column; justify-content: center; }
+.flagship-theme-tag {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.5rem;
+}
+.flagship-theme-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+.flagship-title { font-family: var(--f-d); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.15; color: var(--forest); margin-bottom: 1.5rem; }
+.flagship-story { font-family: var(--f-d); font-size: 1.12rem; font-style: italic; line-height: 1.75; color: rgba(26,26,24,.65); margin-bottom: 2rem; }
+.flagship-stops {
+  display: flex; flex-direction: column; gap: .75rem; margin-bottom: 2.5rem;
+  padding-left: 1rem; border-left: 1px solid var(--mist);
+}
+.flagship-stop { font-size: .85rem; font-weight: 300; color: rgba(26,26,24,.6); display: flex; align-items: baseline; gap: .6rem; }
+.flagship-stop strong { font-weight: 500; color: var(--forest); }
+.flagship-meta { display: flex; gap: 2rem; margin-bottom: 2.5rem; }
+.flagship-meta-item { display: flex; flex-direction: column; gap: .3rem; }
+.flagship-meta-label { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(26,26,24,.4); }
+.flagship-meta-value { font-family: var(--f-d); font-size: 1.2rem; font-weight: 400; color: var(--forest); }
+.flagship-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* ── EXPERIENCES GRID ── */
+.experiences { background: var(--ivory); }
+.exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
+.exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--mist); }
+.exp-card { position: relative; overflow: hidden; aspect-ratio: 3/4; cursor: pointer; background: var(--white); }
+.exp-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+.exp-card:hover .exp-card-img { transform: scale(1.05); }
+.exp-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,26,24,.88) 0%, transparent 55%); }
+.exp-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.75rem; }
+.exp-theme-tag { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--stone); margin-bottom: .5rem; display: flex; align-items: center; gap: .45rem; }
+.exp-theme-tag::before { content: ''; display: block; width: 14px; height: 1px; background: var(--stone); }
+.exp-name { font-family: var(--f-d); font-size: 1.25rem; font-weight: 400; color: var(--white); line-height: 1.2; margin-bottom: .6rem; }
+.exp-details { display: flex; gap: 1rem; font-size: .7rem; font-weight: 300; color: rgba(247,244,238,.55); margin-bottom: 1rem; }
+.exp-book { display: inline-flex; align-items: center; gap: .4rem; font-size: .68rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--white); border-bottom: 1px solid rgba(247,244,238,.35); padding-bottom: .15rem; transition: color .2s, border-color .2s; }
+.exp-book:hover { color: var(--stone); border-color: var(--stone); }
+.exp-coming {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 1rem; background: rgba(26,26,24,.6); backdrop-filter: blur(4px);
+}
+.exp-coming-label { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(247,244,238,.5); }
+.exp-coming-city { font-family: var(--f-d); font-size: 1.6rem; font-weight: 300; color: rgba(247,244,238,.6); font-style: italic; }
+
+/* ── FOUNDER ── */
+.founder { display: grid; grid-template-columns: 1fr 1fr; padding: 0; background: var(--white); }
+.founder-image { position: relative; min-height: 620px; }
+.founder-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.founder-image-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2rem; background: linear-gradient(to top, rgba(26,26,24,.8), transparent);
+  font-family: var(--f-d); font-size: .9rem; font-style: italic; color: rgba(247,244,238,.7);
+  line-height: 1.5;
+}
+.founder-content { padding: 6rem 5rem; display: flex; flex-direction: column; justify-content: center; }
+.founder-credentials { display: flex; flex-direction: column; gap: .6rem; margin-top: 2.5rem; margin-bottom: 2.5rem; }
+.founder-cred {
+  display: flex; align-items: center; gap: .75rem;
+  font-size: .85rem; font-weight: 300; color: rgba(26,26,24,.65);
+}
+.founder-cred-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.founder-quote {
+  margin-top: 2rem; padding: 1.75rem 2rem;
+  border-left: 2px solid var(--gold);
+  background: var(--ivory);
+  font-family: var(--f-d); font-size: 1.15rem; font-style: italic;
+  color: var(--forest); line-height: 1.65;
+}
+.founder-quote cite { display: block; margin-top: .75rem; font-size: .72rem; font-style: normal; letter-spacing: .1em; text-transform: uppercase; color: rgba(26,26,24,.45); }
+
+/* ── PODCAST ── */
+.podcast { background: var(--ink); padding: 6rem 3rem; }
+.podcast-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; align-items: center; }
+.podcast-content .eyebrow { color: var(--stone); }
+.podcast-content .eyebrow::before { background: var(--stone); }
+.podcast-listen { margin-top: 2rem; margin-bottom: 2.5rem; }
+.podcast-ep-label { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(247,244,238,.4); margin-bottom: 1rem; }
+.podcast-ep-list { display: flex; flex-direction: column; gap: 0; }
+.podcast-ep {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 0; border-bottom: 1px solid rgba(247,244,238,.08);
+  transition: background .2s; cursor: pointer;
+}
+.podcast-ep:first-child { border-top: 1px solid rgba(247,244,238,.08); }
+.podcast-ep-play {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(247,244,238,.25);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  color: rgba(247,244,238,.6); transition: border-color .2s, color .2s;
+}
+.podcast-ep:hover .podcast-ep-play { border-color: var(--stone); color: var(--stone); }
+.podcast-ep-info { flex: 1; }
+.podcast-ep-title { font-size: .88rem; font-weight: 400; color: rgba(247,244,238,.75); margin-bottom: .2rem; transition: color .2s; }
+.podcast-ep:hover .podcast-ep-title { color: var(--ivory); }
+.podcast-ep-meta { font-size: .68rem; color: rgba(247,244,238,.35); }
+.podcast-ep-num { font-family: var(--f-d); font-size: 1.5rem; font-weight: 300; color: rgba(247,244,238,.15); flex-shrink: 0; }
+.podcast-platforms { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: .5rem; }
+.podcast-platform {
+  font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(247,244,238,.45); border: 1px solid rgba(247,244,238,.15);
+  padding: .4rem .85rem; border-radius: 2px; transition: color .2s, border-color .2s;
+}
+.podcast-platform:hover { color: var(--stone); border-color: rgba(200,184,154,.4); }
+.podcast-cover-stack { position: relative; }
+.podcast-cover-main {
+  width: 100%; aspect-ratio: 1;
+  background: linear-gradient(135deg, var(--forest) 0%, #0d2018 100%);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  padding: 2.5rem; box-shadow: 0 32px 80px rgba(0,0,0,.4);
+}
+.podcast-cover-inner {
+  text-align: center;
+}
+.podcast-cover-title { font-family: var(--f-d); font-size: 2.4rem; font-weight: 300; color: var(--ivory); line-height: 1.15; margin-bottom: .5rem; }
+.podcast-cover-sub { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--stone); }
+.podcast-cover-wave { margin: 1.5rem auto; display: flex; align-items: flex-end; justify-content: center; gap: 3px; height: 36px; }
+.podcast-cover-wave span {
+  display: block; width: 3px; background: rgba(200,184,154,.4); border-radius: 2px;
+  animation: wave 1.4s ease-in-out infinite;
+}
+.podcast-cover-wave span:nth-child(2) { animation-delay: .15s; }
+.podcast-cover-wave span:nth-child(3) { animation-delay: .3s; }
+.podcast-cover-wave span:nth-child(4) { animation-delay: .45s; }
+.podcast-cover-wave span:nth-child(5) { animation-delay: .3s; }
+.podcast-cover-wave span:nth-child(6) { animation-delay: .15s; }
+.podcast-cover-wave span:nth-child(7) { animation-delay: 0s; }
+@keyframes wave {
+  0%,100%{height:8px;opacity:.4} 50%{height:32px;opacity:1}
+}
+.podcast-eps-count { font-size: .72rem; letter-spacing: .12em; color: rgba(247,244,238,.35); margin-top: 1.25rem; text-align: center; }
+.podcast-covers-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 340px; margin: 0 auto;
+}
+.podcast-covers-grid img {
+  width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.35);
+  transition: transform .3s var(--ease);
+}
+.podcast-covers-grid a:hover img { transform: translateY(-4px); }
+.podcast-cover-label {
+  font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(247,244,238,.55);
+  text-align: center; margin-top: .5rem;
+}
+
+/* ── REVIEWS ── */
+.reviews { background: var(--mist); padding: 6rem 3rem; }
+.reviews-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 2rem; }
+.reviews-score { display: flex; align-items: center; gap: 1.5rem; }
+.reviews-score-num { font-family: var(--f-d); font-size: 4.5rem; font-weight: 300; color: var(--forest); line-height: 1; }
+.stars { color: #f5b942; font-size: 1.1rem; letter-spacing: .08em; }
+.reviews-label { font-size: .72rem; color: rgba(26,26,24,.45); margin-top: .2rem; letter-spacing: .05em; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.review-card {
+  background: var(--white); padding: 2.25rem; border-radius: 4px;
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+.review-card.visible { opacity: 1; transform: translateY(0); }
+.review-card:nth-child(2) { transition-delay: .1s; }
+.review-card:nth-child(3) { transition-delay: .2s; }
+.review-qmark { font-family: var(--f-d); font-size: 4rem; font-weight: 300; color: var(--stone); line-height: .7; margin-bottom: 1.25rem; }
+.review-text { font-family: var(--f-d); font-size: 1.08rem; font-style: italic; color: var(--forest); line-height: 1.65; margin-bottom: 1.75rem; }
+.review-author { display: flex; align-items: center; gap: .75rem; padding-top: 1.25rem; border-top: 1px solid var(--mist); }
+.review-initial { width: 36px; height: 36px; border-radius: 50%; background: var(--forest); color: var(--ivory); font-family: var(--f-d); font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.review-name { font-size: .82rem; font-weight: 500; color: var(--ink); }
+.review-meta { font-size: .7rem; color: rgba(26,26,24,.45); margin-top: .1rem; }
+.review-platform { margin-left: auto; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--stone); }
+.reviews-google-badge {
+  margin-top: 2.5rem; padding: 1.25rem 1.75rem;
+  border: 1px solid rgba(200,184,154,.4); border-radius: 4px; display: inline-flex; align-items: center; gap: 1rem;
+  background: var(--white);
+}
+.google-g { width: 24px; height: 24px; }
+.reviews-google-text { font-size: .8rem; color: rgba(26,26,24,.6); }
+.reviews-google-text strong { color: var(--ink); font-weight: 500; }
+
+/* ── BOOKING FUNNEL ── */
+.booking { background: var(--forest); padding: 6rem 3rem; }
+.booking-inner { max-width: 860px; margin: 0 auto; }
+.booking-tabs { display: flex; gap: 0; margin-top: 3rem; margin-bottom: 0; border-bottom: 1px solid rgba(247,244,238,.15); }
+.booking-tab {
+  font-size: .72rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(247,244,238,.45); padding: .85rem 1.75rem; border-bottom: 2px solid transparent;
+  transition: color .2s, border-color .2s; cursor: pointer; margin-bottom: -1px;
+}
+.booking-tab.active { color: var(--stone); border-bottom-color: var(--stone); }
+.booking-panels { background: rgba(247,244,238,.05); border: 1px solid rgba(247,244,238,.1); border-top: none; border-radius: 0 0 4px 4px; }
+.booking-panel { display: none; padding: 2.5rem; }
+.booking-panel.active { display: block; }
+.booking-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+.booking-field { display: flex; flex-direction: column; gap: .5rem; }
+.booking-field label { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(247,244,238,.45); }
+.booking-field select, .booking-field input {
+  background: rgba(247,244,238,.07); border: 1px solid rgba(247,244,238,.15);
+  color: var(--ivory); font-family: var(--f-b); font-size: .9rem; padding: .75rem 1rem;
+  border-radius: 2px; outline: none; transition: border-color .2s; -webkit-appearance: none;
+}
+.booking-field select:focus, .booking-field input:focus { border-color: rgba(200,184,154,.5); }
+.booking-field select option { background: var(--forest); color: var(--ivory); }
+.booking-field input::placeholder { color: rgba(247,244,238,.3); }
+.booking-submit {
+  display: flex; align-items: center; gap: 1.5rem; margin-top: 1.75rem; flex-wrap: wrap;
+}
+.booking-price { font-family: var(--f-d); font-size: 1.8rem; font-weight: 300; color: var(--ivory); }
+.booking-price span { font-size: .8rem; font-weight: 300; color: rgba(247,244,238,.45); font-family: var(--f-b); }
+.booking-note { font-size: .72rem; color: rgba(247,244,238,.4); margin-top: .5rem; }
+.booking-wa-alt {
+  display: flex; align-items: center; gap: .75rem;
+  margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(247,244,238,.1);
+  font-size: .82rem; color: rgba(247,244,238,.45);
+}
+.wa-btn-inline {
+  display: inline-flex; align-items: center; gap: .45rem;
+  font-size: .75rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  color: #25d366; border: 1px solid rgba(37,211,102,.3); padding: .55rem 1rem; border-radius: 2px;
+  transition: background .2s, color .2s;
+}
+.wa-btn-inline:hover { background: #25d366; color: #fff; }
+
+/* ── JOURNAL ── */
+.studio { background: var(--mist); padding: 6rem 3rem; }
+.studio-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
+.studio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.studio-card { background: var(--white); border-radius: 4px; overflow: hidden; text-align: center; }
+.studio-card-visual {
+  aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center;
+  font-family: var(--f-d); font-size: 1.3rem; font-weight: 400; letter-spacing: .02em;
+  color: var(--ivory); padding: 2rem; text-align: center;
+}
+.studio-card-body { padding: 1.5rem; }
+.studio-card-name { font-family: var(--f-d); font-size: 1.15rem; font-weight: 500; color: var(--forest); margin-bottom: .3rem; }
+.studio-card-price { font-size: .82rem; color: rgba(26,26,24,.5); }
+.studio-cta { margin-top: 2.5rem; text-align: center; }
+
+.journal { background: var(--white); padding: 6rem 3rem; }
+.journal-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
+.journal-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 2px; background: var(--mist); }
+.journal-featured { position: relative; overflow: hidden; }
+.journal-featured-img { width: 100%; height: 420px; object-fit: cover; transition: transform .8s var(--ease); }
+.journal-featured:hover .journal-featured-img { transform: scale(1.03); }
+.journal-featured-body { padding: 2rem 2.5rem 2.5rem; background: var(--white); }
+.journal-side { display: flex; flex-direction: column; gap: 2px; }
+.journal-side-card { background: var(--white); padding: 1.75rem; display: flex; flex-direction: column; gap: .6rem; flex: 1; overflow: hidden; }
+.journal-side-card img { width: 100%; height: 120px; object-fit: cover; margin-bottom: .5rem; transition: transform .6s var(--ease); }
+.journal-side-card:hover img { transform: scale(1.04); }
+.j-tag { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+.j-title { font-family: var(--f-d); font-size: 1.1rem; font-weight: 500; color: var(--forest); line-height: 1.3; }
+.journal-featured-body .j-title { font-size: 1.55rem; }
+.j-excerpt { font-size: .83rem; font-weight: 300; color: rgba(26,26,24,.55); line-height: 1.65; }
+.substack-banner {
+  margin-top: 3rem; padding: 1.75rem 2.5rem;
+  background: var(--ivory); border: 1px solid rgba(200,184,154,.4); border-radius: 4px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+}
+.substack-text h4 { font-family: var(--f-d); font-size: 1.2rem; font-weight: 500; color: var(--forest); margin-bottom: .3rem; }
+.substack-text p { font-size: .83rem; font-weight: 300; color: rgba(26,26,24,.55); }
+.substack-form { display: flex; gap: 0; border: 1px solid rgba(200,184,154,.5); border-radius: 2px; overflow: hidden; }
+.substack-form input { padding: .7rem 1.1rem; background: var(--white); border: none; font-family: var(--f-b); font-size: .88rem; color: var(--ink); outline: none; min-width: 220px; }
+.substack-form input::placeholder { color: rgba(26,26,24,.3); }
+.substack-form button { padding: .7rem 1.25rem; background: var(--forest); border-left: 1px solid rgba(200,184,154,.3); font-family: var(--f-b); font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--white); transition: background .2s; white-space: nowrap; }
+.substack-form button:hover { background: var(--gold); }
+
+/* ── EUROPE VISION ── */
+.vision { background: var(--ivory); padding: 6rem 3rem; text-align: center; }
+.vision-map {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  gap: 0; margin: 3.5rem auto; max-width: 900px;
+  background: var(--mist); border: 1px solid rgba(200,184,154,.3);
+}
+.vmap-city {
+  padding: 2.25rem 1rem;
+  display: flex; flex-direction: column; align-items: center; gap: .75rem;
+  border-right: 1px solid rgba(200,184,154,.2);
+  transition: background .2s;
+}
+.vmap-city:last-child { border-right: none; }
+.vmap-city.active { background: var(--forest); }
+.vmap-city:not(.active):hover { background: rgba(200,184,154,.08); }
+.vmap-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(200,184,154,.3); }
+.vmap-city.active .vmap-dot { background: var(--gold); box-shadow: 0 0 0 4px rgba(168,147,90,.2); }
+.vmap-name { font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(26,26,24,.4); }
+.vmap-city.active .vmap-name { color: var(--stone); }
+.vmap-status { font-size: .55rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(26,26,24,.25); }
+.vmap-city.active .vmap-status { color: var(--gold); }
+
+/* ── FOOTER ── */
+footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,244,238,.6); }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(247,244,238,.1); }
+.footer-brand .nav-wordmark { color: var(--ivory); font-size: 1.2rem; display: block; margin-bottom: .75rem; }
+.footer-brand p { font-size: .85rem; font-weight: 300; line-height: 1.7; max-width: 280px; }
+.footer-col h5 { font-size: .65rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--stone); margin-bottom: 1.25rem; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+.footer-col li a { font-size: .83rem; font-weight: 300; color: rgba(247,244,238,.55); transition: color .2s; }
+.footer-col li a:hover { color: var(--ivory); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: .72rem; color: rgba(247,244,238,.3); }
+.footer-social { display: flex; gap: 1.5rem; }
+.footer-social a { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(247,244,238,.35); transition: color .2s; }
+.footer-social a:hover { color: var(--stone); }
+
+/* ── WA FLOATING ── */
+.wa-float {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 150;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25d366; box-shadow: 0 4px 20px rgba(37,211,102,.35);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s, box-shadow .2s;
+}
+.wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(37,211,102,.45); }
+.wa-float svg { width: 28px; height: 28px; }
+.wa-tooltip {
+  position: absolute; right: 68px; top: 50%; transform: translateY(-50%);
+  background: var(--ink); color: var(--ivory); font-size: .72rem; white-space: nowrap;
+  padding: .45rem .85rem; border-radius: 3px; pointer-events: none;
+  opacity: 0; transition: opacity .2s;
+}
+.wa-float:hover .wa-tooltip { opacity: 1; }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .flagship-inner { grid-template-columns: 1fr; }
+  .flagship-visual { min-height: 420px; }
+  .flagship-content { padding: 3.5rem 2.5rem; }
+  .podcast-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .podcast-cover-stack { max-width: 280px; }
+  .founder { grid-template-columns: 1fr; }
+  .founder-image { min-height: 340px; }
+  .founder-content { padding: 3.5rem 2.5rem; }
+}
+@media (max-width: 900px) {
+  nav { padding: 1.25rem 1.5rem; }
+  nav.scrolled { padding: .85rem 1.5rem; }
+  .nav-links, .nav-actions { display: none; }
+  .nav-mobile { display: flex; }
+  .section { padding: 4rem 1.5rem; }
+  .hero-content { padding: 0 1.5rem 5rem; }
+  .hero-trust { left: 1.5rem; }
+  .hero-scroll { right: 1.5rem; }
+  .exp-grid { grid-template-columns: 1fr 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .journal-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .footer-brand { grid-column: 1 / -1; }
+  .vision-map { grid-template-columns: repeat(4, 1fr); }
+  .booking-form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .hero-headline { font-size: 2.6rem; }
+  .hero-actions, .flagship-actions { flex-direction: column; }
+  .exp-grid { grid-template-columns: 1fr; }
+  .vision-map { grid-template-columns: repeat(2, 1fr); }
+  .philosophy-cities { gap: 1.5rem; }
+  .footer-top { grid-template-columns: 1fr; }
+  .substack-banner { flex-direction: column; }
+  .substack-form { flex-direction: column; }
+  .substack-form input { border-bottom: 1px solid rgba(200,184,154,.3); }
+  .hero-trust { display: none; }
+  .reviews-header { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ WA FLOATING ══ -->
+<a href="https://wa.me/905393815229?text=Hello%20U%C4%9Fur%2C%20I%27d%20like%20to%20book%20a%20Via%20Vestigia%20tour." target="_blank" class="wa-float" aria-label="Book via WhatsApp">
+  <span class="wa-tooltip">Book via WhatsApp</span>
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.554 4.11 1.523 5.836L.057 23.232a.75.75 0 00.92.92l5.396-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.49-5.18-1.349l-.369-.214-3.842 1.044 1.044-3.842-.214-.369A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+
+<!-- ══ NAV ══ -->
+<nav id="mainNav">
+  <a href="/" class="nav-logo">
+    <img src="V-logo.png" alt="Via Vestigia" class="nav-emblem">
+    <span class="nav-wordmark">Via Vestigia</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#experiences">Experiences</a></li>
+    <li><a href="#founder">About</a></li>
+    <li><a href="#podcast">Podcast</a></li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#studio">Studio</a></li>
+    <li><a href="#booking">Book</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="https://wa.me/905393815229" target="_blank" class="nav-wa">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.554 4.11 1.523 5.836L.057 23.232a.75.75 0 00.92.92l5.396-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.49-5.18-1.349l-.369-.214-3.842 1.044 1.044-3.842-.214-.369A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      WhatsApp
+    </a>
+    <a href="#booking" class="nav-cta">Book Now</a>
+  </div>
+  <button class="nav-mobile" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+
+  <!-- City dots overlay -->
+  <div class="hero-map-dots" id="heroMapDots">
+    <div class="city-dot" style="left:52%;top:52%">
+      <div class="city-dot-ring"><div class="city-dot-inner"></div></div>
+      <span class="city-dot-label">Istanbul</span>
+    </div>
+    <div class="city-dot future" style="left:45%;top:54%">
+      <div class="city-dot-ring"><div class="city-dot-inner"></div></div>
+      <span class="city-dot-label">Athens</span>
+    </div>
+    <div class="city-dot future" style="left:33%;top:50%">
+      <div class="city-dot-ring"><div class="city-dot-inner"></div></div>
+      <span class="city-dot-label">Lisbon</span>
+    </div>
+    <div class="city-dot future" style="left:38%;top:47%">
+      <div class="city-dot-ring"><div class="city-dot-inner"></div></div>
+      <span class="city-dot-label">Barcelona</span>
+    </div>
+    <div class="city-dot future" style="left:44%;top:50%">
+      <div class="city-dot-ring"><div class="city-dot-inner"></div></div>
+      <span class="city-dot-label">Naples</span>
+    </div>
+  </div>
+
+  <div class="hero-content" id="heroContent">
+    <p class="hero-eyebrow">Istanbul · Athens · Lisbon · Barcelona · Naples · Valletta</p>
+    <h1 class="hero-headline">
+      The Mediterranean<br>has <em>layers.</em><br>We read them.
+    </h1>
+    <p class="hero-sub">Cultural walking experiences across Europe's oldest cities — guided by Uğur Ulakcı, licensed expert in Byzantine and Ottoman history. Intimate groups. Original routes. No script.</p>
+    <div class="hero-actions">
+      <a href="#flagship" class="btn-primary">
+        The Flagship Experience
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="https://wa.me/905393815229?text=Hello%2C%20I%27d%20like%20to%20book%20a%20tour." target="_blank" class="btn-primary wa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.554 4.11 1.523 5.836L.057 23.232a.75.75 0 00.92.92l5.396-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.49-5.18-1.349l-.369-.214-3.842 1.044 1.044-3.842-.214-.369A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Book via WhatsApp
+      </a>
+      <a href="#podcast" class="btn-ghost">Listen to the Podcast</a>
+    </div>
+  </div>
+
+  <div class="hero-trust">
+    <div class="trust-item"><strong>5.0</strong> ★★★★★ on Viator</div>
+    <div class="trust-item" style="width:1px;height:20px;background:rgba(247,244,238,.2)"></div>
+    <div class="trust-item">Licensed Expert Guide</div>
+    <div class="trust-item" style="width:1px;height:20px;background:rgba(247,244,238,.2)"></div>
+    <div class="trust-item">Max <strong>6</strong> guests</div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- ══ PHILOSOPHY ══ -->
+<div class="philosophy">
+  <p class="philosophy-quote">"Cities are not visited. <span>They are decoded.</span>"</p>
+  <div class="philosophy-cities">
+    <div class="pcity active">
+      <div class="pcity-dot"></div>
+      <span class="pcity-name">Istanbul</span>
+      <span class="pcity-status">Now Open</span>
+    </div>
+    <div class="pcity coming">
+      <div class="pcity-dot"></div>
+      <span class="pcity-name">Athens</span>
+      <span class="pcity-status">2027</span>
+    </div>
+    <div class="pcity coming">
+      <div class="pcity-dot"></div>
+      <span class="pcity-name">Lisbon</span>
+      <span class="pcity-status">2027</span>
+    </div>
+    <div class="pcity coming">
+      <div class="pcity-dot"></div>
+      <span class="pcity-name">Barcelona</span>
+      <span class="pcity-status">Coming</span>
+    </div>
+    <div class="pcity coming">
+      <div class="pcity-dot"></div>
+      <span class="pcity-name">Naples</span>
+      <span class="pcity-status">Coming</span>
+    </div>
+    <div class="pcity coming">
+      <div class="pcity-dot"></div>
+      <span class="pcity-name">Marseille</span>
+      <span class="pcity-status">Coming</span>
+    </div>
+    <div class="pcity coming">
+      <div class="pcity-dot"></div>
+      <span class="pcity-name">Valletta</span>
+      <span class="pcity-status">Coming</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FLAGSHIP ══ -->
+<div class="flagship" id="flagship">
+  <div class="flagship-inner">
+    <div class="flagship-visual">
+      <img src="basilica-cistern-istanbul.jpg" alt="Basilica Cistern Istanbul">
+      <span class="flagship-badge">★ Flagship Experience</span>
+      <div class="flagship-rating">
+        <div>
+          <div class="flagship-stars">★★★★★</div>
+          <p class="flagship-rating-text">5.0 · Verified reviews · Viator & Tripadvisor</p>
+        </div>
+        <div class="flagship-rating-num">5.0</div>
+      </div>
+    </div>
+    <div class="flagship-content">
+      <p class="flagship-theme-tag">Water Legacy · Istanbul</p>
+      <h2 class="flagship-title">The Water City<br>Few Know —<br>Cisterns, Aqueducts<br>& Hammam</h2>
+      <p class="flagship-story">Beneath Istanbul's skyline lies a hidden water system that kept Constantinople alive for 1,500 years. This isn't a tour of monuments. It's a reading of the city's veins — underground, above the streets, inside spaces most visitors never find.</p>
+      <div class="flagship-stops">
+        <div class="flagship-stop"><strong>Basilica Cistern</strong> exterior — the scale that set an empire</div>
+        <div class="flagship-stop"><strong>Hidden underground cistern</strong> — free entry, rarely visited</div>
+        <div class="flagship-stop"><strong>Çemberlitaş Hamamı</strong> — Mimar Sinan, 1584</div>
+        <div class="flagship-stop"><strong>Grand Bazaar</strong> — Ottoman bath culture, still traded</div>
+        <div class="flagship-stop"><strong>Süleymaniye şadırvan</strong> — water ritual at the mosque terrace</div>
+        <div class="flagship-stop"><strong>Valens Aqueduct</strong> — Roman engineering, still standing</div>
+        <div class="flagship-stop"><strong>Zeyrek Çinili Hamamı</strong> — complimentary şerbet on the terrace</div>
+      </div>
+      <div class="flagship-meta">
+        <div class="flagship-meta-item">
+          <span class="flagship-meta-label">Duration</span>
+          <span class="flagship-meta-value">3–4 hours</span>
+        </div>
+        <div class="flagship-meta-item">
+          <span class="flagship-meta-label">Group size</span>
+          <span class="flagship-meta-value">Max 6</span>
+        </div>
+        <div class="flagship-meta-item">
+          <span class="flagship-meta-label">From</span>
+          <span class="flagship-meta-value">$75 / person</span>
+        </div>
+        <div class="flagship-meta-item">
+          <span class="flagship-meta-label">Private</span>
+          <span class="flagship-meta-value">From $185</span>
+        </div>
+      </div>
+      <div class="flagship-actions">
+        <a href="https://www.viator.com/tours/Istanbul/Istanbul-Legacy-of-the-Bath-A-Guided-Walking-Route/d585-5512166P8" target="_blank" class="btn-primary">Check Availability on Viator</a>
+        <a href="https://wa.me/905393815229?text=Hello%2C%20I%27d%20like%20to%20book%20The%20Water%20City%20tour." target="_blank" class="btn-primary wa">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.554 4.11 1.523 5.836L.057 23.232a.75.75 0 00.92.92l5.396-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.49-5.18-1.349l-.369-.214-3.842 1.044 1.044-3.842-.214-.369A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EXPERIENCES ══ -->
+<section class="experiences section" id="experiences">
+  <div class="exp-header">
+    <div>
+      <p class="eyebrow">All Istanbul Experiences</p>
+      <h2 class="h2">Four routes.<br><em>One city, fully decoded.</em></h2>
+    </div>
+    <a href="#booking" class="link-arrow">Book any experience →</a>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-card">
+      <img class="exp-card-img" src="bosphorus-bridge.jpg" alt="The Other Shore — Kadıköy, Istanbul">
+      <div class="exp-overlay"></div>
+      <div class="exp-body">
+        <p class="exp-theme-tag">Kadıköy · The Asian Side</p>
+        <h3 class="exp-name">The Other Shore — Drinks, Stories &amp; the Asian Soul</h3>
+        <div class="exp-details"><span>Small group</span><span>Max 6</span></div>
+        <a href="tours/other-shore.html" class="exp-book">Discover →</a>
+      </div>
+    </div>
+    <div class="exp-card">
+      <img class="exp-card-img" src="golden-horn.jpg" alt="Cosmopolitan heritage Istanbul">
+      <div class="exp-overlay"></div>
+      <div class="exp-body">
+        <p class="exp-theme-tag">Galata · Karaköy · Jewish Quarter</p>
+        <h3 class="exp-name">Cosmopolitan Heritage</h3>
+        <div class="exp-details"><span>Small group</span><span>Max 6</span></div>
+        <a href="tours/cosmopolitan-heritage.html" class="exp-book">Discover →</a>
+      </div>
+    </div>
+    <div class="exp-card">
+      <img class="exp-card-img" src="ottoman-hammam-istanbul.png" alt="Iconic landmarks Istanbul">
+      <div class="exp-overlay"></div>
+      <div class="exp-body">
+        <p class="exp-theme-tag">Sultanahmet · Old City</p>
+        <h3 class="exp-name">Iconic Landmarks, Hidden Layers &amp; Hammam</h3>
+        <div class="exp-details"><span>Small group</span><span>Max 6</span></div>
+        <a href="tours/iconic-landmarks.html" class="exp-book">Discover →</a>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:2rem;font-size:.82rem;color:rgba(43,36,32,.55);">Also in development — <strong>The Cemetery Walk</strong> (Şişli &amp; Feriköy multi-faith corridor).
+    <a href="https://wa.me/905393815229?text=I%27m%20interested%20in%20the%20Cemetery%20Walk." target="_blank" style="color:var(--blue);text-decoration:underline;">Join the waitlist →</a>
+  </p>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<div class="founder" id="founder">
+  <div class="founder-image" style="background:var(--forest);display:flex;align-items:center;justify-content:center;">
+    <img src="via-vestigia-non-terminus-sed-ambulatio-logo.png" alt="Via Vestigia — Non Terminus, Sed Ambulatio" style="position:static;width:70%;height:auto;object-fit:contain;">
+    <p class="founder-image-caption">"The city speaks if you know how to listen.<br>Via Vestigia has spent years learning its language."</p>
+  </div>
+  <div class="founder-content">
+    <p class="eyebrow">About Via Vestigia</p>
+    <h2 class="h2">Not a tour operator.<br><em>A way of reading cities.</em></h2>
+    <p class="body-text">Via Vestigia was built from years of original research into Anatolian history, religious continuity, and the archaeology of everyday life — led by a licensed guide who treats every walk as a research project, not a script.</p>
+    <div class="founder-credentials">
+      <div class="founder-cred"><div class="founder-cred-dot"></div>State-licensed Istanbul & Anatolia Tour Guide</div>
+      <div class="founder-cred"><div class="founder-cred-dot"></div>Founder, Via Vestigia cultural heritage brand</div>
+      <div class="founder-cred"><div class="founder-cred-dot"></div>Podcast host — Byzantine, Ottoman & Anatolian history</div>
+      <div class="founder-cred"><div class="founder-cred-dot"></div>Researcher in Anatolian religious continuity (Eliade tradition)</div>
+      <div class="founder-cred"><div class="founder-cred-dot"></div>Maximum 6 guests — every tour personally led</div>
+    </div>
+    <blockquote class="founder-quote">
+      "Most tours show you Istanbul. Via Vestigia wants to show you why Istanbul exists — the water that fed it, the faiths that layered it, the people who made it the most cosmopolitan city in history."
+      <cite>— Via Vestigia</cite>
+    </blockquote>
+  </div>
+</div>
+
+<!-- ══ PODCAST ══ -->
+<section class="podcast section" id="podcast">
+  <div class="podcast-inner">
+    <div class="podcast-content">
+      <p class="eyebrow light">The Via Vestigia Podcast</p>
+      <h2 class="h2 light">Stories the city<br><em>never told out loud.</em></h2>
+      <p class="body-text light">Each episode goes deeper into the history behind the routes — Hattusa, Aphrodisias, the Hekatomnids, the water engineers of Constantinople. Research-first, script-free, always original.</p>
+      <div class="podcast-listen">
+        <p class="podcast-ep-label">Recent Episodes</p>
+        <div class="podcast-ep-list">
+          <div class="podcast-ep">
+            <div class="podcast-ep-play">
+              <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M0 0l10 6-10 6V0z"/></svg>
+            </div>
+            <div class="podcast-ep-info">
+              <p class="podcast-ep-title">Hekatomnos & Bryaxis — The Patron and the Sculptor</p>
+              <p class="podcast-ep-meta">Bir Sanatçı Bir Mekân · Ep. 1</p>
+            </div>
+            <span class="podcast-ep-num">01</span>
+          </div>
+          <div class="podcast-ep">
+            <div class="podcast-ep-play">
+              <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M0 0l10 6-10 6V0z"/></svg>
+            </div>
+            <div class="podcast-ep-info">
+              <p class="podcast-ep-title">Hattuşa — The Capital That Vanished</p>
+              <p class="podcast-ep-meta">Dünya Başkentleri · Ep. 1</p>
+            </div>
+            <span class="podcast-ep-num">02</span>
+          </div>
+          <div class="podcast-ep">
+            <div class="podcast-ep-play">
+              <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M0 0l10 6-10 6V0z"/></svg>
+            </div>
+            <div class="podcast-ep-info">
+              <p class="podcast-ep-title">Aphrodisias Stadyumu — Sport and the Sacred</p>
+              <p class="podcast-ep-meta">Dünya Stadyumları · Ep. 1</p>
+            </div>
+            <span class="podcast-ep-num">03</span>
+          </div>
+          <div class="podcast-ep">
+            <div class="podcast-ep-play">
+              <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M0 0l10 6-10 6V0z"/></svg>
+            </div>
+            <div class="podcast-ep-info">
+              <p class="podcast-ep-title">Tuşpa — Van Gölü ve Urartu'nun Kalbi</p>
+              <p class="podcast-ep-meta">Dünya Başkentleri · Ep. 2</p>
+            </div>
+            <span class="podcast-ep-num">04</span>
+          </div>
+        </div>
+      </div>
+      <div class="podcast-platforms">
+        <a href="#" class="podcast-platform">Spotify</a>
+        <a href="#" class="podcast-platform">Apple Podcasts</a>
+        <a href="#" class="podcast-platform">YouTube</a>
+        <a href="#" class="podcast-platform">All Episodes →</a>
+      </div>
+    </div>
+    <div class="podcast-cover-stack">
+      <div class="podcast-covers-grid">
+        <div>
+          <img src="via_vestigia_podcast_kapak.png" alt="Dünya Başkentleri">
+          <p class="podcast-cover-label">Dünya Başkentleri</p>
+        </div>
+        <div>
+          <img src="via_vestigia_podcast-amber.png" alt="Bir İçecek Bir Mekan">
+          <p class="podcast-cover-label">Bir İçecek Bir Mekan</p>
+        </div>
+        <div>
+          <img src="via_vestigia_podcast-lacivert.png" alt="Dünya Stadyumları">
+          <p class="podcast-cover-label">Dünya Stadyumları</p>
+        </div>
+        <div>
+          <img src="via_vestigia_podcast_antrasit.png" alt="Bir Sanatçı Bir Mekan">
+          <p class="podcast-cover-label">Bir Sanatçı Bir Mekan</p>
+        </div>
+      </div>
+      <p class="podcast-eps-count">20+ episodes across 4 thematic series</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ REVIEWS ══ -->
+<section class="reviews" id="reviews">
+  <div class="reviews-header reveal">
+    <div>
+      <p class="eyebrow">What Travellers Say</p>
+      <h2 class="h2">5.0 on Viator.<br><em>Every single time.</em></h2>
+      <div class="reviews-score">
+        <span class="reviews-score-num">5.0</span>
+        <div>
+          <div class="stars">★★★★★</div>
+          <p class="reviews-label">Verified · Viator & Tripadvisor</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="reviews-google-badge">
+        <svg class="google-g" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        <div class="reviews-google-text"><strong>Also on Google Reviews</strong><br>Search "Via Vestigia Istanbul"</div>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-qmark">"</div>
+      <p class="review-text">A wealth of knowledge delivered in a very personal manner. Truly off the general tourist path — a treat for anyone who wants more than the usual.</p>
+      <div class="review-author">
+        <div class="review-initial">D</div>
+        <div>
+          <p class="review-name">David E.</p>
+          <p class="review-meta">June 2026 · The Water City Tour</p>
+        </div>
+        <span class="review-platform">Viator ★★★★★</span>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-qmark">"</div>
+      <p class="review-text">Uğur is passionate and knowledgeable. There are a million options to see standard sites — but this tour is truly unique. We felt genuinely well taken care of.</p>
+      <div class="review-author">
+        <div class="review-initial">D</div>
+        <div>
+          <p class="review-name">Davey W.</p>
+          <p class="review-meta">July 2025 · The Water City Tour</p>
+        </div>
+        <span class="review-platform">Viator ★★★★★</span>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-qmark">"</div>
+      <p class="review-text">Super knowledgeable about the history. Learned so much about Turkish culture — a real introduction, not a performance. Genuinely impressive depth.</p>
+      <div class="review-author">
+        <div class="review-initial">R</div>
+        <div>
+          <p class="review-name">Rebecca D.</p>
+          <p class="review-meta">January 2026 · The Water City Tour</p>
+        </div>
+        <span class="review-platform">Viator ★★★★★</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BOOKING FUNNEL ══ -->
+<section class="booking section" id="booking">
+  <div class="booking-inner">
+    <p class="eyebrow light">Direct Booking</p>
+    <h2 class="h2 light">Reserve your experience.<br><em>No commission. No middleman.</em></h2>
+    <p class="body-text light" style="margin-bottom:0">Book directly with Uğur for the best rate and full flexibility — or use WhatsApp for instant confirmation.</p>
+
+    <div class="booking-tabs">
+      <button class="booking-tab active" onclick="switchTab('group', this)">Group Tour</button>
+      <button class="booking-tab" onclick="switchTab('private', this)">Private Tour</button>
+      <button class="booking-tab" onclick="switchTab('custom', this)">Custom / Multi-Day</button>
+    </div>
+
+    <div class="booking-panels">
+      <!-- GROUP -->
+      <div class="booking-panel active" id="tab-group">
+        <div class="booking-form-row">
+          <div class="booking-field">
+            <label>Experience</label>
+            <select>
+              <option>The Water City Few Know (Flagship)</option>
+              <option>The Other Shore — Cosmopolitan Heritage</option>
+              <option>Iconic Landmarks & Hidden Layers</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label>Preferred Date</label>
+            <input type="date">
+          </div>
+        </div>
+        <div class="booking-form-row">
+          <div class="booking-field">
+            <label>Number of Guests</label>
+            <select>
+              <option>1 guest</option>
+              <option>2 guests</option>
+              <option>3 guests</option>
+              <option>4 guests</option>
+              <option>5 guests</option>
+              <option>6 guests (full group)</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label>Your Name</label>
+            <input type="text" placeholder="Full name">
+          </div>
+        </div>
+        <div class="booking-form-row">
+          <div class="booking-field">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+          <div class="booking-field">
+            <label>WhatsApp (optional, for quick confirmation)</label>
+            <input type="tel" placeholder="+1 234 567 8900">
+          </div>
+        </div>
+        <div class="booking-submit">
+          <div>
+            <p class="booking-price">$75 <span>/ person · all fees included</span></p>
+            <p class="booking-note">Free cancellation up to 24 hours before. No hidden costs.</p>
+          </div>
+          <button class="btn-primary" type="button" onclick="handleBooking()">
+            Request Booking →
+          </button>
+        </div>
+        <div class="booking-wa-alt">
+          <span>Prefer instant confirmation?</span>
+          <a href="https://wa.me/905393815229?text=Hello%2C%20I%27d%20like%20to%20book%20a%20group%20tour." target="_blank" class="wa-btn-inline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.554 4.11 1.523 5.836L.057 23.232a.75.75 0 00.92.92l5.396-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.49-5.18-1.349l-.369-.214-3.842 1.044 1.044-3.842-.214-.369A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- PRIVATE -->
+      <div class="booking-panel" id="tab-private">
+        <div class="booking-form-row">
+          <div class="booking-field">
+            <label>Experience</label>
+            <select>
+              <option>The Water City Few Know — Private</option>
+              <option>Cosmopolitan Heritage — Private</option>
+              <option>Custom itinerary (I'll describe below)</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label>Preferred Date</label>
+            <input type="date">
+          </div>
+        </div>
+        <div class="booking-form-row">
+          <div class="booking-field">
+            <label>Group Size</label>
+            <select>
+              <option>1–2 guests</option>
+              <option>3–4 guests</option>
+              <option>5–6 guests</option>
+              <option>7–8 guests</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label>Your Name</label>
+            <input type="text" placeholder="Full name">
+          </div>
+        </div>
+        <div class="booking-form-row" style="grid-template-columns:1fr">
+          <div class="booking-field">
+            <label>Special interests or requests</label>
+            <input type="text" placeholder="e.g. Architecture focus, family with children, anniversary celebration…">
+          </div>
+        </div>
+        <div class="booking-submit">
+          <div>
+            <p class="booking-price">$185 <span>/ group up to 4 · all fees included</span></p>
+            <p class="booking-note">Fully bespoke. Flexible timing. Uğur responds within 24 hours.</p>
+          </div>
+          <button class="btn-primary" type="button" onclick="handlePrivateBooking()">
+            Enquire Now →
+          </button>
+        </div>
+        <div class="booking-wa-alt">
+          <span>Fastest response:</span>
+          <a href="https://wa.me/905393815229?text=Hello%20U%C4%9Fur%2C%20I%27d%20like%20to%20arrange%20a%20private%20tour." target="_blank" class="wa-btn-inline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.554 4.11 1.523 5.836L.057 23.232a.75.75 0 00.92.92l5.396-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.49-5.18-1.349l-.369-.214-3.842 1.044 1.044-3.842-.214-.369A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            WhatsApp Via Vestigia Directly
+          </a>
+        </div>
+      </div>
+
+      <!-- CUSTOM -->
+      <div class="booking-panel" id="tab-custom">
+        <p style="color:rgba(247,244,238,.6); font-size:.9rem; margin-bottom:1.75rem; line-height:1.7; font-weight:300;">
+          Planning a cultural itinerary across multiple cities? Academic delegation, architectural tour, or bespoke multi-day experience? Via Vestigia can design a route around your specific interests — across Istanbul and, from 2027, across the Mediterranean.
+        </p>
+        <div class="booking-form-row">
+          <div class="booking-field">
+            <label>Your Name / Organisation</label>
+            <input type="text" placeholder="Name or institution">
+          </div>
+          <div class="booking-field">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+        </div>
+        <div class="booking-form-row" style="grid-template-columns:1fr">
+          <div class="booking-field">
+            <label>Tell us about your trip</label>
+            <input type="text" placeholder="Dates, group size, cities, interests, theme…">
+          </div>
+        </div>
+        <div class="booking-submit">
+          <button class="btn-primary" type="button">
+            Send Enquiry →
+          </button>
+          <a href="https://wa.me/905393815229?text=Hello%20U%C4%9Fur%2C%20I%27d%20like%20to%20discuss%20a%20custom%20experience." target="_blank" class="wa-btn-inline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.554 4.11 1.523 5.836L.057 23.232a.75.75 0 00.92.92l5.396-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.49-5.18-1.349l-.369-.214-3.842 1.044 1.044-3.842-.214-.369A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Or chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STUDIO ══ -->
+<section class="studio section" id="studio">
+  <div class="studio-header">
+    <div>
+      <p class="eyebrow">Via Vestigia Studio</p>
+      <h2 class="h2">Artifacts<br><em>you can take home.</em></h2>
+    </div>
+    <a href="https://www.etsy.com/shop/ViaVestigiaStudio" target="_blank" class="link-arrow">Visit the shop →</a>
+  </div>
+  <p class="body-text" style="margin-bottom:2.5rem;">Poster prints of the cities and monuments Via Vestigia decodes — Constantinople, Konstantiniyye, Hattuşa, and more. Each piece designed in the brand's own visual language.</p>
+  <div class="studio-grid">
+    <div class="studio-card">
+      <div class="studio-card-visual" style="background:var(--forest);">Constantinople</div>
+      <div class="studio-card-body">
+        <p class="studio-card-name">Constantinople</p>
+        <p class="studio-card-price">Poster print</p>
+      </div>
+    </div>
+    <div class="studio-card">
+      <div class="studio-card-visual" style="background:var(--gold);">Konstantiniyye</div>
+      <div class="studio-card-body">
+        <p class="studio-card-name">Konstantiniyye</p>
+        <p class="studio-card-price">Poster print</p>
+      </div>
+    </div>
+    <div class="studio-card">
+      <div class="studio-card-visual" style="background:var(--rust);">Hattuşa</div>
+      <div class="studio-card-body">
+        <p class="studio-card-name">Hattuşa</p>
+        <p class="studio-card-price">Poster print</p>
+      </div>
+    </div>
+  </div>
+  <div class="studio-cta">
+    <a href="https://www.etsy.com/shop/ViaVestigiaStudio" target="_blank" class="btn-primary">Shop on Etsy</a>
+  </div>
+</section>
+
+<!-- ══ JOURNAL ══ -->
+<section class="journal section" id="journal">
+  <div class="journal-header">
+    <div>
+      <p class="eyebrow">The Via Vestigia Journal</p>
+      <h2 class="h2">Stories from the city's<br><em>hidden layers.</em></h2>
+    </div>
+    <a href="#" class="link-arrow">All stories →</a>
+  </div>
+  <div class="journal-grid">
+    <div class="journal-featured">
+      <img class="journal-featured-img" src="medusa.jpg" alt="Basilica Cistern Medusa head, Istanbul">
+      <div class="journal-featured-body">
+        <p class="j-tag">Water Legacy</p>
+        <h3 class="j-title">Istanbul Was Built on Water — Most Visitors Never Find Out</h3>
+        <p class="j-excerpt" style="margin-top:.5rem">Beneath the streets of Sultanahmet lies an engineering marvel few visitors ever encounter — the hidden water system that kept the city alive for 1,500 years.</p>
+      </div>
+    </div>
+    <div class="journal-side">
+      <div class="journal-side-card">
+        <img src="ottoman-hammam-istanbul.png" alt="Historic hammam Istanbul">
+        <p class="j-tag">Ottoman Culture</p>
+        <h3 class="j-title">10 Historic Hammams in Istanbul</h3>
+        <p class="j-excerpt">A guided list of the city's most storied bathhouses — where to go, and what makes each one worth the visit.</p>
+      </div>
+      <div class="journal-side-card">
+        <img src="basilica-cistern-istanbul.jpg" alt="Basilica Cistern Istanbul">
+        <p class="j-tag">Behind the Research</p>
+        <h3 class="j-title">Why I Started Researching the Hidden Layers of Istanbul — and Never Stopped</h3>
+        <p class="j-excerpt">"I was standing inside the Basilica Cistern when I realized my narration wasn't good enough. Not wrong. Just thin. The space deserved more."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Substack newsletter -->
+  <div class="substack-banner reveal">
+    <div class="substack-text">
+      <h4>The Via Vestigia Dispatch</h4>
+      <p>Dispatches on Anatolian history, Mediterranean culture, and the hidden layers of the cities we walk. On Substack. Sent rarely. Never rushed.</p>
+    </div>
+    <form class="substack-form" onsubmit="handleNewsletter(event)">
+      <input type="email" placeholder="Your email address" required>
+      <button type="submit">Subscribe on Substack</button>
+    </form>
+  </div>
+</section>
+
+<!-- ══ EUROPE VISION ══ -->
+<section class="vision section reveal" id="vision">
+  <p class="eyebrow" style="justify-content:center">The Vision</p>
+  <h2 class="h2" style="text-align:center; margin:0 auto 1rem">One brand. <em>Seven cities.</em><br>The whole Mediterranean decoded.</h2>
+  <p class="body-text" style="text-align:center; margin:0 auto 0">Beginning in Istanbul and expanding across the ancient Mediterranean — each city decoded through the same lens of water, faith, architecture, and cosmopolitan history.</p>
+  <div class="vision-map">
+    <div class="vmap-city active">
+      <div class="vmap-dot"></div>
+      <span class="vmap-name">Istanbul</span>
+      <span class="vmap-status">Open Now</span>
+    </div>
+    <div class="vmap-city">
+      <div class="vmap-dot"></div>
+      <span class="vmap-name">Athens</span>
+      <span class="vmap-status">2027</span>
+    </div>
+    <div class="vmap-city">
+      <div class="vmap-dot"></div>
+      <span class="vmap-name">Lisbon</span>
+      <span class="vmap-status">2027</span>
+    </div>
+    <div class="vmap-city">
+      <div class="vmap-dot"></div>
+      <span class="vmap-name">Barcelona</span>
+      <span class="vmap-status">Coming</span>
+    </div>
+    <div class="vmap-city">
+      <div class="vmap-dot"></div>
+      <span class="vmap-name">Naples</span>
+      <span class="vmap-status">Coming</span>
+    </div>
+    <div class="vmap-city">
+      <div class="vmap-dot"></div>
+      <span class="vmap-name">Marseille</span>
+      <span class="vmap-status">Coming</span>
+    </div>
+    <div class="vmap-city">
+      <div class="vmap-dot"></div>
+      <span class="vmap-name">Valletta</span>
+      <span class="vmap-status">Coming</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="nav-wordmark" style="display:flex;align-items:center;gap:.6rem;"><img src="V-logo.png" alt="" style="width:26px;height:26px;object-fit:contain;">Via Vestigia</span>
+      <p>Intimate cultural walking experiences across the Mediterranean. Licensed expert guiding. Original thematic routes. Beginning in Istanbul — expanding across the ancient world.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Istanbul</h5>
+      <ul>
+        <li><a href="#flagship">The Water City (Flagship)</a></li>
+        <li><a href="#">The Other Shore</a></li>
+        <li><a href="#">Iconic & Hidden Layers</a></li>
+        <li><a href="#">Cemetery Walk (2025)</a></li>
+        <li><a href="#booking">Private Tours</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Brand</h5>
+      <ul>
+        <li><a href="#founder">About Via Vestigia</a></li>
+        <li><a href="#podcast">The Podcast</a></li>
+        <li><a href="#journal">Journal</a></li>
+        <li><a href="#">Print Shop (Etsy)</a></li>
+        <li><a href="#vision">Mediterranean Vision</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:hello@viavestigia.com">hello@viavestigia.com</a></li>
+        <li><a href="https://wa.me/905393815229" target="_blank">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Substack</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Via Vestigia. Istanbul, Turkey. State-Licensed Cultural Tour Guide · TÜRSAB (2027)</p>
+    <div class="footer-social">
+      <a href="#">Instagram</a>
+      <a href="#">Substack</a>
+      <a href="#">Podcast</a>
+      <a href="#">Etsy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hero entrance
+  const heroBg = document.getElementById('heroBg');
+  const heroContent = document.getElementById('heroContent');
+  const heroMapDots = document.getElementById('heroMapDots');
+  requestAnimationFrame(() => {
+    heroBg.classList.add('loaded');
+    setTimeout(() => heroContent.classList.add('visible'), 200);
+    setTimeout(() => heroMapDots.classList.add('visible'), 1200);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal, .review-card').forEach(el => observer.observe(el));
+  document.querySelectorAll('.review-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.1}s`; });
+
+  // Booking tabs
+  function switchTab(id, btn) {
+    document.querySelectorAll('.booking-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.booking-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+  }
+
+  // Booking handlers — in production, connect to your backend or Calendly/Bókun
+  function handleBooking() {
+    const wa = 'https://wa.me/905393815229?text=Hello%20U%C4%9Fur%2C%20I%27d%20like%20to%20book%20a%20group%20tour.%20Please%20confirm%20availability.';
+    window.open(wa, '_blank');
+  }
+  function handlePrivateBooking() {
+    const wa = 'https://wa.me/905393815229?text=Hello%20U%C4%9Fur%2C%20I%27d%20like%20to%20arrange%20a%20private%20Via%20Vestigia%20tour.';
+    window.open(wa, '_blank');
+  }
+
+  // Newsletter → Substack
+  function handleNewsletter(e) {
+    e.preventDefault();
+    const email = e.target.querySelector('input').value;
+    window.open('https://viavestigia.substack.com/subscribe?email=' + encodeURIComponent(email), '_blank');
+  }
+</script>
+</body>
+</html>
