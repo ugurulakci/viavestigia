@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ugurulakci.github.io/viavestigia/sitemap.xml
+Sitemap: https://viavestigia.com/sitemap.xml
