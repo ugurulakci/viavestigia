@@ -21,18 +21,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Istanbul: The Water City Few Know — Cisterns, Aqueducts & Hammam Tour</title>
-  <meta name="description" content="Descend beneath Istanbul's streets to explore hidden cisterns, Byzantine aqueducts, Ottoman hammams and the Grand Bazaar with licensed guide Uğur M. Ulakci. Small group, max 12 people. Book on Viator." />
-  <meta name="keywords" content="Istanbul water tour, hidden cistern Istanbul, Istanbul hammam tour, aqueduct tour Istanbul, Grand Bazaar tour, small group Istanbul, licensed guide Istanbul" />
+  <meta name="description" content="Descend beneath Istanbul's streets to explore historic cisterns, Byzantine aqueducts, Ottoman hammams and the Grand Bazaar with licensed guide Uğur M. Ulakci. Small group, max 12 people. Book on Viator." />
+  <meta name="keywords" content="Istanbul water tour, historic cistern Istanbul, Istanbul hammam tour, aqueduct tour Istanbul, Grand Bazaar tour, small group Istanbul, licensed guide Istanbul" />
   <link rel="canonical" href="https://viavestigia.com/water-city-tour.html" />
   <meta property="og:title" content="Istanbul: The Water City Few Know" />
-  <meta property="og:description" content="Follow the hidden waterways that kept empires alive. Cisterns, aqueducts, hammams & the Grand Bazaar — max 12 people, licensed guide." />
+  <meta property="og:description" content="Follow the waterways that kept empires alive. Cisterns, aqueducts, hammams & the Grand Bazaar — max 12 people, licensed guide." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://viavestigia.com/water-city-tour.html" />
   <meta property="og:image" content="https://viavestigia.com/basilica-cistern-istanbul.jpg" />
   <meta property="og:site_name" content="Via Vestigia" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Istanbul: The Water City Few Know" />
-  <meta name="twitter:description" content="Follow the hidden waterways that kept empires alive. Cisterns, aqueducts, hammams & the Grand Bazaar — max 12 people, licensed guide." />
+  <meta name="twitter:description" content="Follow the waterways that kept empires alive. Cisterns, aqueducts, hammams & the Grand Bazaar — max 12 people, licensed guide." />
   <meta name="twitter:image" content="https://viavestigia.com/basilica-cistern-istanbul.jpg" />
   <link rel="icon" type="image/png" href="https://viavestigia.com/V-logo.png" />
 
@@ -41,7 +41,7 @@
     "@context": "https://schema.org",
     "@type": "TouristTrip",
     "name": "Istanbul: The Water City Few Know — Cisterns, Aqueducts & Hammam",
-    "description": "An immersive small-group walking tour following Istanbul's hidden water heritage — hidden cisterns, Byzantine aqueducts, Ottoman hammams, and Grand Bazaar artisan traditions.",
+    "description": "An immersive small-group walking tour following Istanbul's water heritage — cisterns, Eastern Roman aqueducts, Ottoman hammams, and Grand Bazaar artisan traditions.",
     "provider": {
       "@type": "Person",
       "name": "Uğur M. Ulakci",
@@ -69,6 +69,12 @@
       --gold: #c9a96e;
       --gold-light: #e8d5a3;
       --rust: #8b3a2a;
+      /* Scoped global-nav/footer tokens — namespaced to avoid colliding with
+         this page's own --gold/--rust/--stone (different hex meaning site-wide) */
+      --gnav-terracotta: #A66C49;
+      --gnav-forest: #466D9B;
+      --gnav-stone: #C7BBB0;
+      --gnav-ivory: #F0EAD8;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -76,11 +82,13 @@
 
     /* STICKY BAR */
     .sticky-bar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 78px; left: 0; right: 0; z-index: 100;
       background: var(--deep-water);
       display: flex; align-items: center; justify-content: space-between;
       padding: 12px 32px;
-      transform: translateY(-100%); transition: transform 0.4s ease;
+      transform: translateY(-150%); transition: transform 0.4s ease;
+      /* NOTE: top:78px estimated to clear #siteNav's scrolled height (~70px).
+         Needs visual QA at real viewport to fine-tune this offset precisely. */
     }
     .sticky-bar.visible { transform: translateY(0); }
     .sticky-bar-text { color: var(--gold-light); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; }
@@ -297,9 +305,83 @@
       .sticky-bar-text { display: none; }
       .final-cta { padding: 80px 24px; }
     }
+
+    /* ══ GLOBAL SITE NAV (hardcoded values — matches homepage palette,
+       independent of this page's own --gold/--rust/--stone/--ink tokens) ══ */
+    nav#siteNav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 3rem;
+      background: rgba(43,36,32,.35);
+      backdrop-filter: blur(10px);
+      transition: background .4s cubic-bezier(0.16,1,0.3,1), padding .4s cubic-bezier(0.16,1,0.3,1), box-shadow .4s;
+    }
+    nav#siteNav.scrolled {
+      background: rgba(247,244,216,.96);
+      backdrop-filter: blur(14px);
+      padding: 1rem 3rem;
+      box-shadow: 0 1px 0 rgba(200,184,154,.25);
+    }
+    nav#siteNav.scrolled .site-nav-wordmark, nav#siteNav.scrolled .site-nav-links a { color: var(--gnav-forest); }
+    nav#siteNav .site-nav-wordmark, nav#siteNav .site-nav-links a { color: var(--gnav-ivory); transition: color .4s cubic-bezier(0.16,1,0.3,1); }
+    .site-nav-logo { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+    .site-nav-emblem { width: 38px; height: 38px; flex-shrink: 0; object-fit: contain; }
+    .site-nav-wordmark { font-family: 'Cormorant SC', Georgia, serif; font-size: 1.15rem; font-weight: 500; letter-spacing: .08em; }
+    .site-nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0; padding: 0; }
+    .site-nav-links a { font-size: .78rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; opacity: .65; transition: opacity .2s; text-decoration: none; }
+    .site-nav-links a:hover { opacity: 1; }
+    .site-nav-mobile { display: none; flex-direction: column; gap: 5px; padding: 4px; background:none; border:none; cursor:pointer; }
+    .site-nav-mobile span { display: block; width: 22px; height: 1px; background: var(--gnav-ivory); }
+    nav#siteNav.scrolled .site-nav-mobile span { background: var(--gnav-forest); }
+    @media (max-width: 860px) {
+      nav#siteNav { padding: 1.25rem 1.5rem; }
+      .site-nav-links { display: none; }
+      .site-nav-mobile { display: flex; }
+    }
+
+    /* Push page content below the fixed global nav */
+    body { padding-top: 0; }
+    .hero { margin-top: 0; }
+
+    /* ══ GLOBAL FOOTER (hardcoded values) ══ */
+    footer#siteFooter { background: var(--gnav-forest); padding: 4.5rem 3rem 2rem; color: rgba(247,244,238,.6); font-family: 'Jost', sans-serif; }
+    .site-footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(247,244,238,.1); }
+    .site-footer-brand-word { color: var(--gnav-ivory); font-size: 1.2rem; display: block; margin-bottom: .75rem; font-family: 'Cormorant SC', Georgia, serif; font-style: italic; }
+    .site-footer-brand p { font-size: .85rem; font-weight: 300; line-height: 1.7; max-width: 280px; }
+    .site-footer-col h5 { font-size: .65rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--gnav-stone); margin-bottom: 1.25rem; }
+    .site-footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; margin:0; padding:0; }
+    .site-footer-col li a { font-size: .83rem; font-weight: 300; color: rgba(247,244,238,.55); transition: color .2s; text-decoration:none; }
+    .site-footer-col li a:hover { color: var(--gnav-ivory); }
+    .site-footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .site-footer-copy { font-size: .72rem; color: rgba(247,244,238,.3); }
+    .site-footer-social { display: flex; gap: 1.5rem; }
+    .site-footer-social a { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(247,244,238,.35); transition: color .2s; text-decoration:none; }
+    .site-footer-social a:hover { color: var(--gnav-stone); }
+    @media (max-width: 768px) {
+      .site-footer-top { grid-template-columns: 1fr 1fr; }
+      footer#siteFooter { padding: 3rem 24px 2rem; }
+    }
+
+    /* ══ BACK TO EXPERIENCES ══ */
+    .back-to-experiences { background: var(--parchment); text-align: center; padding: 48px; }
+    .back-to-experiences a { font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--cistern); text-decoration: none; border-bottom: 1px solid rgba(27,61,82,.3); padding-bottom: 4px; }
+    .back-to-experiences a:hover { color: var(--rust); border-color: var(--rust); }
   </style>
 </head>
 <body>
+<!-- ══ GLOBAL SITE NAV ══ -->
+<nav id="siteNav">
+  <a href="/" class="site-nav-logo">
+    <img src="V-logo.png" alt="Via Vestigia" class="site-nav-emblem">
+    <span class="site-nav-wordmark">Via Vestigia</span>
+  </a>
+  <ul class="site-nav-links">
+    <li><a href="/#experiences">Experiences</a></li>
+    <li><a href="/#journal">Journal</a></li>
+    <li><a href="/#founder">About</a></li>
+  </ul>
+  <button class="site-nav-mobile" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
   <!-- STICKY BAR -->
   <div class="sticky-bar" id="stickyBar">
@@ -358,7 +440,7 @@
         <div class="intro-body">
           <p>Most visitors see Istanbul's domes and minarets. Few descend beneath the streets — into vaulted chambers, moss-covered columns, and still dark pools that kept three empires alive.</p>
           <div class="intro-pull">"What if the story of Istanbul was written in water?"</div>
-          <p>On this intimate walking tour, you'll follow the city's hydraulic heritage from Roman engineers to Byzantine emperors to Ottoman architects — each civilization inheriting, adapting, and beautifying what came before. Ending with the living artisan culture of the Grand Bazaar.</p>
+          <p>On this intimate walking tour, you'll follow the city's hydraulic heritage from Roman engineers to Eastern Roman emperors to Ottoman architects — each civilization inheriting, adapting, and beautifying what came before. Ending with the living artisan culture of the Grand Bazaar.</p>
           <p>Ottoman şerbet tastings and Turkish coffee included along the way.</p>
         </div>
       </div>
@@ -398,12 +480,12 @@
         <div class="stop">
           <div class="stop-number">01</div>
           <div class="stop-era">Roman · Underground</div>
-          <h3 class="stop-name">A Hidden Cistern</h3>
+          <h3 class="stop-name">An Underground Cistern</h3>
           <p class="stop-desc">Not the famous one. A lesser-known Roman cistern, quiet and largely unseen — still carrying the weight of the empire that built it. This is where the tour begins: below the surface, before the crowds.</p>
         </div>
         <div class="stop">
           <div class="stop-number">02</div>
-          <div class="stop-era">Byzantine · 4th Century</div>
+          <div class="stop-era">Eastern Roman · 4th Century</div>
           <h3 class="stop-name">Valens Aqueduct</h3>
           <p class="stop-desc">Walk beneath Constantinople's great water highway — a towering double-tiered aqueduct that carried water from Thrace over 120 km. One of the longest aqueduct systems of the ancient world, still standing in the middle of modern Istanbul.</p>
         </div>
@@ -487,7 +569,7 @@
         <div class="guide-box">
           <p class="guide-tag">Your Guide</p>
           <h3 class="guide-name">Uğur M. Ulakci</h3>
-          <p class="guide-bio">A licensed Istanbul guide with a background in performing arts and academic research in Anatolian history. Uğur built this tour around a single obsession: how three civilizations used water to write the story of one city.</p>
+          <p class="guide-bio">A licensed professional tour guide with a background in tourist guiding and travel management, with a research-led approach to the history, urban fabric, and cultural heritage of Istanbul and Anatolia. Uğur built this tour around a single obsession: how three civilizations used water to write the story of one city.</p>
           <div class="guide-credentials">
             <div class="credential"><div class="credential-dot"></div>Ministry-licensed tourist guide, Istanbul</div>
             <div class="credential"><div class="credential-dot"></div>Founder, Via Vestigia — cultural heritage podcast</div>
@@ -502,27 +584,68 @@
   <section class="final-cta">
     <div class="final-cta-inner">
       <p class="section-label">Ready to Go Beneath?</p>
-      <h2>The city has been<br>hiding this from you.<br><em>Not anymore.</em></h2>
-      <p>Spots fill quickly. Six people maximum means this tour books out days in advance — especially in peak season.</p>
+      <h2>See Istanbul<br>Through the Water<br><em>That Shaped It.</em></h2>
+      <p>Small groups are limited to a maximum of 12 guests, kept intentionally close for real conversation along the way.</p>
       <a href="https://www.viator.com/tours/Istanbul/Istanbul-Legacy-of-the-Bath-A-Guided-Walking-Route/d585-5512166P8" target="_blank" rel="noopener" class="btn-book">Reserve Your Spot on Viator →</a>
       <p class="availability-note">Secure payment · Free cancellation · Instant confirmation</p>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div>
-      <div class="footer-brand">Via Vestigia</div>
-      <div class="footer-tagline">Non terminus, sed ambulatio</div>
+  <!-- BACK TO EXPERIENCES -->
+  <div class="back-to-experiences">
+    <a href="/experiences/">&larr; Back to All Experiences</a>
+  </div>
+
+  <!-- ══ GLOBAL FOOTER ══ -->
+  <footer id="siteFooter">
+    <div class="site-footer-top">
+      <div class="site-footer-brand">
+        <span class="site-footer-brand-word">Via Vestigia</span>
+        <p>Intimate cultural walking experiences across Istanbul. Licensed expert guiding. Original thematic routes. Beginning in Istanbul &mdash; expanding across the Mediterranean.</p>
+      </div>
+      <div class="site-footer-col">
+        <h5>Istanbul</h5>
+        <ul>
+          <li><a href="/#flagship">The Water City</a></li>
+          <li><a href="/experiences/">All Experiences</a></li>
+          <li><a href="https://www.viator.com/tours/Istanbul/Istanbul-Legacy-of-the-Bath-A-Guided-Walking-Route/d585-5512166P8" target="_blank" rel="noopener">Book This Tour</a></li>
+        </ul>
+      </div>
+      <div class="site-footer-col">
+        <h5>Brand</h5>
+        <ul>
+          <li><a href="/#founder">About Via Vestigia</a></li>
+          <li><a href="/#journal">Journal</a></li>
+          <li><a href="/#vision">Mediterranean Vision</a></li>
+        </ul>
+      </div>
+      <div class="site-footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:ulakci.um@outlook.com">ulakci.um@outlook.com</a></li>
+          <li><a href="https://wa.me/905393815229" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/ugurulakci/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://viavestigia.substack.com" target="_blank" rel="noopener">Substack</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-links">
-      <a href="https://www.viator.com/tours/Istanbul/Istanbul-Legacy-of-the-Bath-A-Guided-Walking-Route/d585-5512166P8" target="_blank" rel="noopener">Book Tour</a>
-      <a href="https://ugurulakci.komi.io" target="_blank" rel="noopener">All Tours</a>
-      <a href="https://open.spotify.com/show/4RaCXmtT1FOKo59qqtcegl?si=PHJ2MhqwSjaEUDXN1jdHjA" target="_blank" rel="noopener">Podcast</a>
+    <div class="site-footer-bottom">
+      <p class="site-footer-copy">&copy; 2026 Via Vestigia. Istanbul, Turkey. Ministry-Licensed Cultural Tour Guide &middot; Licence No. 013366</p>
+      <div class="site-footer-social">
+        <a href="https://www.instagram.com/ugurulakci/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://viavestigia.substack.com" target="_blank" rel="noopener">Substack</a>
+        <a href="https://open.spotify.com/show/4RaCXmtT1FOKo59qqtcegl?si=PHJ2MhqwSjaEUDXN1jdHjA" target="_blank" rel="noopener">Podcast</a>
+      </div>
     </div>
   </footer>
 
   <script>
+    // Global site nav scroll behavior
+    const siteNav = document.getElementById('siteNav');
+    window.addEventListener('scroll', () => {
+      siteNav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
     const stickyBar = document.getElementById('stickyBar');
     const hero = document.querySelector('.hero');
     const observer = new IntersectionObserver(([e]) => {
