@@ -338,6 +338,11 @@ nav .nav-wordmark, nav .nav-links a { color: var(--ivory); transition: color .4s
 
 /* ── EXPERIENCES GRID ── */
 .experiences { background: var(--ivory); }
+/* Compact discovery-gateway override for the reconciled Experiences teaser
+   (scoped to .experiences only — base .section padding stays untouched
+   for every other section on the page). */
+.experiences.section { padding: 3.5rem 3rem; }
+.experiences .exp-header { margin-bottom: 1.75rem; }
 .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
 .exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--mist); }
 .exp-card { position: relative; overflow: hidden; aspect-ratio: 3/4; cursor: pointer; background: var(--white); }
@@ -827,10 +832,10 @@ footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,2
     <div>
       <p class="eyebrow">All Istanbul Experiences</p>
       <h2 class="h2">Three experiences.<br><em>One city, read differently.</em></h2>
+      <p class="body-text" style="margin-top:.75rem;max-width:32rem;">Explore Istanbul through water, urban traces, and the communities that shaped the city.</p>
     </div>
-    <a href="/experiences/" class="link-arrow">See all experiences →</a>
   </div>
-  <div class="exp-teaser-cta" style="text-align:center;padding:2rem 0;">
+  <div class="exp-teaser-cta" style="text-align:center;">
     <a href="/experiences/" class="btn-primary">Explore All Experiences →</a>
   </div>
 </section>
