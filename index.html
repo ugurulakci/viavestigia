@@ -354,6 +354,7 @@ nav .nav-wordmark, nav .nav-links a { color: var(--ivory); transition: color .4s
 .experiences.section { padding: 2.75rem 3rem; }
 .experiences .exp-header { margin-bottom: 1.75rem; }
 .experiences .exp-teaser-cta { text-align: left; margin-top: .5rem; }
+.journal .exp-teaser-cta { text-align: left; margin-top: .5rem; }
 .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
 .exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--mist); }
 .exp-card { position: relative; overflow: hidden; aspect-ratio: 3/4; cursor: pointer; background: var(--white); }
@@ -564,6 +565,11 @@ nav .nav-wordmark, nav .nav-links a { color: var(--ivory); transition: color .4s
 .studio-cta { margin-top: 2.5rem; text-align: center; }
 
 .journal { background: var(--white); padding: 6rem 3rem; }
+/* Compact Journal Gateway teaser -- scoped to .journal only, matching the
+   same reduction already applied to .experiences. Base .journal padding
+   above stays untouched for anything else that might reuse the class. */
+.journal.section { padding: 2.75rem 3rem; }
+.journal .journal-header { margin-bottom: 1.75rem; }
 .journal-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
 .journal-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 2px; background: var(--mist); }
 .journal-featured { position: relative; overflow: hidden; }
@@ -1129,47 +1135,17 @@ footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,2
   </div>
 </section>
 
-<!-- ══ JOURNAL ══ -->
+<!-- ══ JOURNAL GATEWAY TEASER ══ -->
 <section class="journal section" id="journal">
   <div class="journal-header">
     <div>
       <p class="eyebrow">The Via Vestigia Journal</p>
-      <h2 class="h2">Stories from the city's<br><em>living history.</em></h2>
-    </div>
-    <a href="https://viavestigia.substack.com" target="_blank" rel="noopener" class="link-arrow">All stories →</a>
-  </div>
-  <div class="journal-grid">
-    <a href="https://viavestigia.substack.com" target="_blank" rel="noopener" class="journal-featured">
-      <img class="journal-featured-img" src="medusa.jpg" alt="Basilica Cistern Medusa head, Istanbul">
-      <div class="journal-featured-body">
-        <p class="j-tag">Water Legacy</p>
-        <h3 class="j-title">Istanbul Was Built on Water</h3>
-        <p class="j-excerpt" style="margin-top:.5rem">Beneath the streets of Sultanahmet lies an engineering marvel still shaping the city — the water system that kept it alive for 1,500 years.</p>
-      </div>
-    </a>
-    <div class="journal-side">
-      <a href="https://viavestigia.substack.com" target="_blank" rel="noopener" class="journal-side-card">
-        <img src="ottoman-hammam-istanbul.png" alt="Historic hammam Istanbul">
-        <p class="j-tag">Ottoman Culture</p>
-        <h3 class="j-title">10 Historic Hammams in Istanbul</h3>
-        <p class="j-excerpt">A guided list of the city's most storied bathhouses — where to go, and what makes each one worth the visit.</p>
-      </a>
-      <a href="https://viavestigia.substack.com" target="_blank" rel="noopener" class="journal-side-card">
-        <img src="basilica-cistern-istanbul.jpg" alt="Basilica Cistern Istanbul">
-        <p class="j-tag">Behind the Research</p>
-        <h3 class="j-title">Why I Started Researching Istanbul's Living History — and Never Stopped</h3>
-        <p class="j-excerpt">"I was standing inside the Basilica Cistern when I realized my narration wasn't good enough. Not wrong. Just thin. The space deserved more."</p>
-      </a>
+      <h2 class="h2">Stories, systems, and traces<br><em>from the Mediterranean.</em></h2>
+      <p class="body-text" style="margin-top:.75rem;max-width:32rem;">Long-form essays on cities, empires, rituals, and everyday culture — beginning in Istanbul and following the traces outward.</p>
     </div>
   </div>
-
-  <!-- Substack newsletter -->
-  <div class="substack-banner reveal">
-    <div class="substack-text">
-      <h4>The Via Vestigia Dispatch</h4>
-      <p>Dispatches on Anatolian history, Mediterranean culture, and the systems that shaped the cities we walk. On Substack. Sent rarely. Never rushed.</p>
-    </div>
-    <a href="https://viavestigia.substack.com" target="_blank" rel="noopener" class="btn-primary">Subscribe to the Journal →</a>
+  <div class="exp-teaser-cta">
+    <a href="/journal/" class="btn-primary">Explore the Journal →</a>
   </div>
 </section>
 
