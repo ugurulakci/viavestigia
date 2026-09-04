@@ -677,6 +677,20 @@ footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,2
      .flagship-meta flex rule above is untouched. */
   .flagship-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 1rem; }
   .flagship-meta-item:nth-child(3) { grid-column: 1 / -1; }
+  /* Mobile hamburger menu: was a non-functional decorative button (no
+     listener, no menu element existed at all). Reveal the existing
+     .nav-links list as a dropdown panel, toggled via #mainNav.nav-open.
+     Solid background so text stays readable regardless of nav.scrolled
+     state (unlike the scroll-dependent transparent/ivory link colors). */
+  nav.nav-open .nav-links {
+    display: flex; flex-direction: column; gap: 0;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--ink); padding: 1.5rem;
+  }
+  nav.nav-open .nav-links li { border-bottom: 1px solid rgba(240,234,216,.12); }
+  nav.nav-open .nav-links li:last-child { border-bottom: none; }
+  nav.nav-open .nav-links a { display: block; padding: .9rem 0; color: var(--ivory) !important; opacity: .85; }
+  nav.nav-open .nav-links a:hover { opacity: 1; }
 }
 @media (max-width: 600px) {
   .hero-headline { font-size: 2.6rem; }
@@ -707,7 +721,7 @@ footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,2
     <img src="V-logo.png" alt="Via Vestigia" class="nav-emblem">
     <span class="nav-wordmark">Via Vestigia</span>
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="/experiences/">Experiences</a></li>
     <li><a href="#journal">Journal</a></li>
     <li><a href="#founder">About</a></li>
@@ -719,7 +733,7 @@ footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,2
       WhatsApp
     </a>
   </div>
-  <button class="nav-mobile" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button class="nav-mobile" id="navMobileToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- ══ HERO ══ -->
@@ -1212,6 +1226,21 @@ footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,2
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile hamburger menu toggle (previously non-functional: no listener,
+  // no menu markup existed). Reveals #navLinks as a dropdown via nav.nav-open.
+  const navMobileToggle = document.getElementById('navMobileToggle');
+  const navLinks = document.getElementById('navLinks');
+  navMobileToggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('nav-open');
+    navMobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      navMobileToggle.setAttribute('aria-expanded', 'false');
+    });
   });
 
   // Hero entrance
