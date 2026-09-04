@@ -1,23 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Microsoft Clarity -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "y5qrv95a45");
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KWJCM7ZM31"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-KWJCM7ZM31');
-</script>
+<!-- Google Analytics (GA4) and Microsoft Clarity are NOT loaded here.
+     Both require explicit visitor consent -- see /cookie-consent.js,
+     loaded near the end of <body>, which injects them only after
+     Accept Analytics is clicked. -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Via Vestigia — Cultural Walking Experiences in Istanbul & the Mediterranean</title>
@@ -265,6 +252,29 @@ nav .nav-wordmark, nav .nav-links a { color: var(--ivory); transition: color .4s
 
 /* ── SECTION DEFAULTS ── */
 .section { padding: 6rem 3rem; }
+
+/* == Cookie consent banner == */
+.vv-cookie-banner {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 500;
+  background: var(--ink); color: var(--ivory);
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 -4px 24px rgba(0,0,0,.25);
+}
+.vv-cookie-banner-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; flex-wrap: wrap;
+}
+.vv-cookie-banner-text { font-size: .85rem; line-height: 1.6; max-width: 640px; opacity: .9; margin: 0; }
+.vv-cookie-banner-actions { display: flex; gap: .75rem; flex-shrink: 0; }
+.vv-cookie-btn { padding: .7rem 1.5rem; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; border: none; font-family: inherit; }
+.vv-cookie-btn-primary { background: var(--gold); color: var(--ink); }
+.vv-cookie-btn-secondary { background: transparent; color: var(--ivory); border: 1px solid rgba(240,234,216,.35); }
+@media (max-width: 640px) {
+  .vv-cookie-banner-inner { flex-direction: column; align-items: stretch; }
+  .vv-cookie-banner-actions { width: 100%; }
+  .vv-cookie-btn { flex: 1; }
+}
 .eyebrow {
   font-size: .68rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase;
   color: var(--gold); margin-bottom: 1rem;
@@ -1159,10 +1169,7 @@ footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,2
       <h4>The Via Vestigia Dispatch</h4>
       <p>Dispatches on Anatolian history, Mediterranean culture, and the systems that shaped the cities we walk. On Substack. Sent rarely. Never rushed.</p>
     </div>
-    <form class="substack-form" onsubmit="handleNewsletter(event)">
-      <input type="email" placeholder="Your email address" required>
-      <button type="submit">Subscribe on Substack</button>
-    </form>
+    <a href="https://viavestigia.substack.com" target="_blank" rel="noopener" class="btn-primary">Subscribe to the Journal →</a>
   </div>
 </section>
 
@@ -1217,9 +1224,24 @@ footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,2
       <!-- Podcast/Etsy URLs not yet confirmed -- add real links when available -->
       <span style="opacity:.5">Podcast</span>
       <span style="opacity:.5">Etsy</span>
+      <a href="/privacy-cookie-policy.html">Privacy &amp; Cookie Policy</a>
+      <!-- Reopens the consent banner -- deliberately NOT a link to a page. -->
+      <a href="#" id="vvCookiePrefsLink">Cookie Preferences</a>
     </div>
   </div>
 </footer>
+
+<!-- == Cookie consent banner (hidden until a visitor decision is needed) == -->
+<div id="vvCookieBanner" class="vv-cookie-banner" hidden>
+  <div class="vv-cookie-banner-inner">
+    <p class="vv-cookie-banner-text">We use analytics cookies (Google Analytics, Microsoft Clarity) only with your consent, to understand how visitors use this site. Nothing is loaded or set until you choose. See our <a href="/privacy-cookie-policy.html" style="color:inherit;text-decoration:underline;">Privacy &amp; Cookie Policy</a>.</p>
+    <div class="vv-cookie-banner-actions">
+      <button id="vvCookieReject" class="vv-cookie-btn vv-cookie-btn-secondary">Reject Non-Essential</button>
+      <button id="vvCookieAccept" class="vv-cookie-btn vv-cookie-btn-primary">Accept Analytics</button>
+    </div>
+  </div>
+</div>
+<script src="/cookie-consent.js"></script>
 
 <script>
   // Nav scroll
@@ -1280,12 +1302,6 @@ footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,2
     window.open(wa, '_blank');
   }
 
-  // Newsletter → Substack
-  function handleNewsletter(e) {
-    e.preventDefault();
-    const email = e.target.querySelector('input').value;
-    window.open('https://viavestigia.substack.com/subscribe?email=' + encodeURIComponent(email), '_blank');
-  }
 </script>
 </body>
 </html>
