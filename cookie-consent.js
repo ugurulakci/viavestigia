@@ -126,6 +126,13 @@
     }
   }
 
+  // Public helper for other scripts on the page (e.g. per-page event
+  // tracking) to check the SAME consent state this file already owns,
+  // rather than reading localStorage or re-deriving consent themselves.
+  window.vvConsentAccepted = function () {
+    return getConsent() === 'accepted';
+  };
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
