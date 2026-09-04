@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) and Microsoft Clarity are NOT loaded here.
+     Both require explicit visitor consent -- see /cookie-consent.js,
+     loaded near the end of <body>, which injects them only after
+     Accept Analytics is clicked. -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Via Vestigia Podcast — A Turkish-Language Podcast on Cities and Traces</title>
+  <meta name="description" content="Via Vestigia Podcast — a Turkish-language series exploring ancient capitals, forgotten drinks, artists, and arenas through the traces they left behind. Listen on Spotify or Apple Podcasts." />
+  <link rel="canonical" href="https://viavestigia.com/podcast/" />
+  <meta property="og:title" content="Via Vestigia Podcast" />
+  <meta property="og:description" content="A Turkish-language podcast exploring cities, capitals, drinks, artists, and arenas through the traces they left behind." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://viavestigia.com/podcast/" />
+  <meta property="og:site_name" content="Via Vestigia" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Via Vestigia Podcast" />
+  <meta name="twitter:description" content="A Turkish-language podcast exploring cities, capitals, drinks, artists, and arenas through the traces they left behind." />
+  <link rel="icon" type="image/png" href="https://viavestigia.com/V-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600;700&family=Alegreya+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink:     #2B2420;
+      --forest:  #466D9B;
+      --stone:   #C7BBB0;
+      --ivory:   #F0EAD8;
+      --gold:    #A66C49;
+      --mist:    #E3DACB;
+      --rust:    #717F95;
+      --white:   #ffffff;
+      --f-d: 'Cormorant SC', Georgia, serif;
+      --f-b: 'Alegreya Sans', system-ui, sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--ivory); color: var(--ink); font-family: var(--f-b); font-weight: 400; overflow-x: hidden; }
+
+    /* ══ GLOBAL SITE NAV ══ */
+    nav#siteNav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 3rem;
+      background: rgba(247,244,216,.96);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 rgba(200,184,154,.25);
+    }
+    .site-nav-logo { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+    .site-nav-emblem { width: 38px; height: 38px; flex-shrink: 0; object-fit: contain; }
+    .site-nav-wordmark { font-family: var(--f-d); font-size: 1.15rem; font-weight: 500; letter-spacing: .08em; color: var(--forest); }
+    .site-nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .site-nav-links a { font-size: .78rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); opacity: .65; transition: opacity .2s; text-decoration: none; }
+    .site-nav-links a:hover { opacity: 1; }
+    .site-nav-mobile { display: none; flex-direction: column; gap: 5px; padding: 4px; background: none; border: none; cursor: pointer; }
+    .site-nav-mobile span { display: block; width: 22px; height: 1px; background: var(--ink); }
+    @media (max-width: 860px) {
+      nav#siteNav { padding: 1.25rem 1.5rem; }
+      .site-nav-links { display: none; }
+      .site-nav-mobile { display: flex; }
+      nav#siteNav.nav-open .site-nav-links {
+        display: flex; flex-direction: column; gap: 0;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--ink); padding: 1.5rem;
+      }
+      nav#siteNav.nav-open .site-nav-links li { border-bottom: 1px solid rgba(240,234,216,.12); }
+      nav#siteNav.nav-open .site-nav-links li:last-child { border-bottom: none; }
+      nav#siteNav.nav-open .site-nav-links a { display: block; padding: .9rem 0; color: var(--ivory) !important; opacity: .85; }
+      nav#siteNav.nav-open .site-nav-links a:hover { opacity: 1; }
+    }
+
+    /* ══ HERO ══ */
+    .podcast-hero { padding: 168px 48px 40px; max-width: 780px; margin: 0 auto; text-align: center; }
+    .podcast-hero p.eyebrow { font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+    .podcast-hero h1 { font-family: var(--f-d); font-size: clamp(30px, 4.5vw, 48px); font-weight: 500; color: var(--forest); line-height: 1.2; margin-bottom: 1.1rem; }
+    .podcast-hero p.deck { font-size: 1.02rem; font-weight: 300; line-height: 1.7; color: rgba(43,36,32,.75); max-width: 600px; margin: 0 auto 1.5rem; }
+    .lang-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--forest); border: 1px solid rgba(70,109,155,.3);
+      padding: .5rem 1rem; margin-bottom: 0;
+    }
+
+    /* ══ LISTENING PLATFORMS ══ */
+    .platforms { padding: 24px 48px 64px; text-align: center; }
+    .platform-links { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block; background: var(--forest); color: var(--ivory);
+      text-decoration: none; padding: .85rem 1.9rem;
+      font-size: .78rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      border: none; transition: background .25s var(--ease);
+    }
+    .btn-primary:hover { background: var(--gold); }
+    .btn-secondary {
+      display: inline-block; background: transparent; color: var(--forest);
+      text-decoration: none; padding: .85rem 1.9rem;
+      font-size: .78rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      border: 1px solid var(--forest); transition: all .25s var(--ease);
+    }
+    .btn-secondary:hover { background: var(--forest); color: var(--ivory); }
+
+    /* ══ SHARED SECTION LABELS ══ */
+    .section-eyebrow { font-size: .68rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: .75rem; }
+    .section-h2 { font-family: var(--f-d); font-size: clamp(24px, 3vw, 34px); font-weight: 500; color: var(--forest); line-height: 1.2; }
+
+    /* ══ FEATURED EPISODE ══ */
+    .featured { padding: 32px 48px 72px; max-width: 1000px; margin: 0 auto; }
+    .featured-card {
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 0;
+      background: var(--white); border: 1px solid rgba(113,127,149,.15);
+      text-decoration: none; color: var(--ink);
+    }
+    .featured-image { position: relative; aspect-ratio: 1/1; background: var(--mist); overflow: hidden; }
+    .featured-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .featured-image.placeholder { display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; color: rgba(70,109,155,.4); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+    .featured-body { padding: 2.25rem; display: flex; flex-direction: column; justify-content: center; }
+    .featured-tag { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .6rem; }
+    .featured-title { font-family: var(--f-d); font-size: clamp(22px, 2.6vw, 28px); font-weight: 600; color: var(--forest); line-height: 1.25; margin-bottom: .5rem; }
+    .featured-meta { font-size: .78rem; color: rgba(43,36,32,.55); margin-bottom: 1.25rem; }
+    .featured-links { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .featured-links a { font-size: .74rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--forest); text-decoration: none; }
+    .featured-links a:hover { color: var(--gold); }
+
+    /* ══ SELECTED EPISODES ══ */
+    .selected { padding: 24px 48px 80px; max-width: 1000px; margin: 0 auto; }
+    .selected-header { margin-bottom: 2.5rem; }
+    .selected-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5px; background: var(--mist); }
+    .selected-card { background: var(--white); display: flex; flex-direction: column; }
+    .selected-image { aspect-ratio: 1/1; background: var(--mist); overflow: hidden; }
+    .selected-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .selected-body { padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1; }
+    .selected-tag { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: .6rem; }
+    .selected-title { font-family: var(--f-d); font-size: 1.3rem; font-weight: 600; color: var(--forest); line-height: 1.3; margin-bottom: .4rem; }
+    .selected-meta { font-size: .76rem; color: rgba(43,36,32,.5); margin-bottom: 1.1rem; }
+    .selected-link { font-size: .7rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--forest); text-decoration: none; margin-top: auto; }
+    .selected-link:hover { color: var(--gold); }
+
+    @media (max-width: 900px) {
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-image { aspect-ratio: 16/9; }
+    }
+    @media (max-width: 640px) {
+      .selected-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══ SERIES OVERVIEW ══ */
+    .series { background: var(--forest); color: var(--ivory); padding: 72px 48px; }
+    .series-inner { max-width: 900px; margin: 0 auto; }
+    .series-inner .section-eyebrow { color: var(--gold); opacity: .9; text-align: center; }
+    .series-inner h2 { font-family: var(--f-d); font-size: clamp(24px, 3.2vw, 34px); font-weight: 500; color: var(--ivory); text-align: center; margin-bottom: 2.5rem; }
+    .series-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 3rem; }
+    .series-item-name { font-family: var(--f-d); font-size: 1.2rem; font-weight: 500; color: var(--ivory); margin-bottom: .4rem; }
+    .series-item-desc { font-size: .85rem; line-height: 1.6; color: rgba(240,234,216,.7); }
+    @media (max-width: 640px) {
+      .series-list { grid-template-columns: 1fr; }
+    }
+
+    /* ══ FINAL LISTEN CTA ══ */
+    .podcast-cta { text-align: center; padding: 72px 48px; }
+    .podcast-cta p { font-family: var(--f-d); font-size: clamp(20px, 2.6vw, 28px); font-style: italic; color: var(--forest); margin-bottom: .75rem; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .podcast-cta .lang-note { font-size: .8rem; color: rgba(43,36,32,.5); margin-bottom: 1.75rem; }
+
+    /* ══ GLOBAL FOOTER ══ */
+    footer#siteFooter { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,244,238,.6); }
+    .site-footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(247,244,238,.1); }
+    .site-footer-brand-word { color: var(--ivory); font-size: 1.2rem; display: block; margin-bottom: .75rem; font-family: var(--f-d); font-style: italic; }
+    .site-footer-brand p { font-size: .85rem; font-weight: 300; line-height: 1.7; max-width: 280px; }
+    .site-footer-col h5 { font-size: .65rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--stone); margin-bottom: 1.25rem; }
+    .site-footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .site-footer-col li a { font-size: .83rem; font-weight: 300; color: rgba(247,244,238,.55); transition: color .2s; text-decoration: none; }
+    .site-footer-col li a:hover { color: var(--ivory); }
+    .site-footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .site-footer-copy { font-size: .72rem; color: rgba(247,244,238,.3); }
+    .site-footer-social { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .site-footer-social a { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(247,244,238,.35); transition: color .2s; text-decoration: none; }
+    .site-footer-social a:hover { color: var(--stone); }
+    @media (max-width: 768px) {
+      .site-footer-top { grid-template-columns: 1fr 1fr; }
+      footer#siteFooter { padding: 3rem 24px 2rem; }
+      .podcast-hero, .featured, .selected { padding-left: 24px; padding-right: 24px; }
+      .platforms, .series, .podcast-cta { padding-left: 24px; padding-right: 24px; }
+    }
+
+    /* == Cookie consent banner == */
+    .vv-cookie-banner {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 500;
+      background: var(--ink); color: var(--ivory);
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 -4px 24px rgba(0,0,0,.25);
+    }
+    .vv-cookie-banner-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; flex-wrap: wrap;
+    }
+    .vv-cookie-banner-text { font-size: .85rem; line-height: 1.6; max-width: 640px; opacity: .9; margin: 0; }
+    .vv-cookie-banner-actions { display: flex; gap: .75rem; flex-shrink: 0; }
+    .vv-cookie-btn { padding: .7rem 1.5rem; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; border: none; font-family: inherit; }
+    .vv-cookie-btn-primary { background: var(--gold); color: var(--ink); }
+    .vv-cookie-btn-secondary { background: transparent; color: var(--ivory); border: 1px solid rgba(240,234,216,.35); }
+    @media (max-width: 640px) {
+      .vv-cookie-banner-inner { flex-direction: column; align-items: stretch; }
+      .vv-cookie-banner-actions { width: 100%; }
+      .vv-cookie-btn { flex: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ GLOBAL SITE NAV ══ -->
+<nav id="siteNav" class="scrolled">
+  <a href="/" class="site-nav-logo">
+    <img src="/V-logo.png" alt="Via Vestigia" class="site-nav-emblem">
+    <span class="site-nav-wordmark">Via Vestigia</span>
+  </a>
+  <ul class="site-nav-links" id="siteNavLinks">
+    <li><a href="/experiences/">Experiences</a></li>
+    <li><a href="/journal/">Journal</a></li>
+    <li><a href="/#founder">About</a></li>
+  </ul>
+  <button class="site-nav-mobile" id="siteNavMobileToggle" aria-label="Menu" aria-expanded="false" aria-controls="siteNavLinks"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="podcast-hero">
+  <p class="eyebrow">Via Vestigia Podcast</p>
+  <h1>History leaves traces. We follow them by ear.</h1>
+  <p class="deck">A Turkish-language podcast exploring ancient capitals, forgotten drinks, artists, and arenas — not through the main gate, but through the traces they left behind.</p>
+  <span class="lang-badge">Podcast Language · Turkish</span>
+</section>
+
+<!-- ══ LISTENING PLATFORMS ══ -->
+<section class="platforms">
+  <div class="platform-links">
+    <a href="https://open.spotify.com/show/4RaCXmtT1FOKo59qqtcegl" target="_blank" rel="noopener" class="btn-primary">Listen on Spotify →</a>
+    <a href="https://podcasts.apple.com/tr/podcast/via-vestigia/id1883624748?l=tr" target="_blank" rel="noopener" class="btn-secondary">Listen on Apple Podcasts →</a>
+  </div>
+</section>
+
+<!-- ══ FEATURED EPISODE ══ -->
+<section class="featured">
+  <p class="section-eyebrow">Featured Episode</p>
+  <div class="featured-card">
+    <div class="featured-image"><img src="via_vestigia_podcast_kapak.png" alt="Via Vestigia Podcast — World Capitals" loading="lazy" /></div>
+    <div class="featured-body">
+      <p class="featured-tag">World Capitals</p>
+      <h2 class="featured-title">Hattuşa</h2>
+      <p class="featured-meta">Episode in Turkish · 59 min</p>
+      <div class="featured-links">
+        <a href="https://podcasts.apple.com/tr/podcast/hattu%C5%9Fa-hitit-i-mparatorlu%C4%9Fu-ba%C5%9Fkenti-via-vestigia/id1883624748?i=1000753963980&l=tr" target="_blank" rel="noopener">Listen on Apple →</a>
+        <a href="https://open.spotify.com/show/4RaCXmtT1FOKo59qqtcegl" target="_blank" rel="noopener">Listen on Spotify →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SELECTED EPISODES ══ -->
+<section class="selected">
+  <div class="selected-header">
+    <p class="section-eyebrow">Selected Episodes</p>
+    <h2 class="section-h2">Four series, four ways of following a trace.</h2>
+  </div>
+  <div class="selected-grid">
+
+    <div class="selected-card">
+      <div class="selected-image"><img src="via_vestigia_podcast_kapak.png" alt="World Capitals — Via Vestigia Podcast" loading="lazy" /></div>
+      <div class="selected-body">
+        <p class="selected-tag">World Capitals</p>
+        <h3 class="selected-title">Tuşpa</h3>
+        <p class="selected-meta">Episode in Turkish · 32 min</p>
+        <a href="https://podcasts.apple.com/tr/podcast/tu%C5%9Fpa-urartu-i-mparatorlu%C4%9Fu-ba%C5%9Fkenti-via-vestigia/id1883624748?i=1000760037603&l=tr" target="_blank" rel="noopener" class="selected-link">Listen on Apple →</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="selected-image"><img src="via_vestigia_podcast-amber.png" alt="One Drink, One Place — Via Vestigia Podcast" loading="lazy" /></div>
+      <div class="selected-body">
+        <p class="selected-tag">One Drink, One Place</p>
+        <h3 class="selected-title">Hardaliye · Kırklareli</h3>
+        <p class="selected-meta">Episode in Turkish · 29 min</p>
+        <a href="https://podcasts.apple.com/tr/podcast/hardaliye-k%C4%B1rklareli-bir-i-%C3%A7ecek-bir-mek%C3%A2n-via-vestigia/id1883624748?i=1000755602024&l=tr" target="_blank" rel="noopener" class="selected-link">Listen on Apple →</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="selected-image"><img src="via_vestigia_podcast-lacivert.png" alt="World Stadiums — Via Vestigia Podcast" loading="lazy" /></div>
+      <div class="selected-body">
+        <p class="selected-tag">World Stadiums</p>
+        <h3 class="selected-title">Aphrodisias Stadium</h3>
+        <p class="selected-meta">Episode in Turkish · 34 min</p>
+        <a href="https://podcasts.apple.com/tr/podcast/aphrodisias-stadyumu-d%C3%BCnya-stadyumlar%C4%B1-via-vestigia/id1883624748?i=1000756803393&l=tr" target="_blank" rel="noopener" class="selected-link">Listen on Apple →</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="selected-image"><img src="via_vestigia_podcast_antrasit.png" alt="One Artist, One Place — Via Vestigia Podcast" loading="lazy" /></div>
+      <div class="selected-body">
+        <p class="selected-tag">One Artist, One Place</p>
+        <h3 class="selected-title">Bryaxis &amp; Hekatomnos</h3>
+        <p class="selected-meta">Episode in Turkish · 28 min</p>
+        <a href="https://podcasts.apple.com/tr/podcast/bryaxis-hekatomnos-mezar-an%C4%B1t%C4%B1-bir-sanat%C3%A7%C4%B1-bir-mek%C3%A2n/id1883624748?i=1000758301446&l=tr" target="_blank" rel="noopener" class="selected-link">Listen on Apple →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ SERIES OVERVIEW ══ -->
+<section class="series">
+  <div class="series-inner">
+    <p class="section-eyebrow">Four Ways of Following a Trace</p>
+    <h2>The series</h2>
+    <div class="series-list">
+      <div>
+        <p class="series-item-name">World Capitals</p>
+        <p class="series-item-desc">Ancient capitals read as living civilizations, not ruins — Hattuşa, Tuşpa, and the seats of power that shaped Anatolia.</p>
+      </div>
+      <div>
+        <p class="series-item-name">One Drink, One Place</p>
+        <p class="series-item-desc">Forgotten and half-remembered drinks — hardaliye, sübye — as living memory of a region's people and rituals.</p>
+      </div>
+      <div>
+        <p class="series-item-name">World Stadiums</p>
+        <p class="series-item-desc">Ancient arenas as evidence of public life, competition, and belief — not just architecture.</p>
+      </div>
+      <div>
+        <p class="series-item-name">One Artist, One Place</p>
+        <p class="series-item-desc">The craftspeople and sculptors behind individual monuments, and the places that made their work possible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL LISTEN CTA ══ -->
+<section class="podcast-cta">
+  <p>"Non terminus, sed ambulatio." Not a destination, but a walk.</p>
+  <p class="lang-note">The Via Vestigia Podcast is recorded and published in Turkish.</p>
+  <div class="platform-links">
+    <a href="https://open.spotify.com/show/4RaCXmtT1FOKo59qqtcegl" target="_blank" rel="noopener" class="btn-primary">Listen on Spotify →</a>
+    <a href="https://podcasts.apple.com/tr/podcast/via-vestigia/id1883624748?l=tr" target="_blank" rel="noopener" class="btn-secondary">Listen on Apple Podcasts →</a>
+  </div>
+</section>
+
+<!-- ══ GLOBAL FOOTER ══ -->
+<footer id="siteFooter">
+  <div class="site-footer-top">
+    <div class="site-footer-brand">
+      <span class="site-footer-brand-word">Via Vestigia</span>
+      <p>Intimate cultural walking experiences across Istanbul. Licensed expert guiding. Original thematic routes. Beginning in Istanbul &mdash; expanding across the Mediterranean.</p>
+    </div>
+    <div class="site-footer-col">
+      <h5>Istanbul</h5>
+      <ul>
+        <li><a href="/water-city-tour.html">The Water City</a></li>
+        <li><a href="/trace-city-tour.html">The Trace City</a></li>
+        <li><a href="/cosmopolitan-city-tour.html">The Cosmopolitan City</a></li>
+        <li><a href="/experiences/">All Experiences</a></li>
+      </ul>
+    </div>
+    <div class="site-footer-col">
+      <h5>Brand</h5>
+      <ul>
+        <li><a href="/#founder">About Via Vestigia</a></li>
+        <li><a href="/journal/">Journal</a></li>
+        <li><a href="/#vision">Mediterranean Vision</a></li>
+      </ul>
+    </div>
+    <div class="site-footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:hello@viavestigia.com">hello@viavestigia.com</a></li>
+        <li><a href="https://wa.me/905393815229" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/viavestigia/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://viavestigia.substack.com" target="_blank" rel="noopener">Substack</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer-bottom">
+    <p class="site-footer-copy">&copy; 2026 Via Vestigia. Istanbul, Turkey. Ministry-Licensed Cultural Tour Guide &middot; Licence No. 013366</p>
+    <div class="site-footer-social">
+      <a href="https://www.instagram.com/viavestigia/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://viavestigia.substack.com" target="_blank" rel="noopener">Substack</a>
+      <a href="https://open.spotify.com/show/4RaCXmtT1FOKo59qqtcegl" target="_blank" rel="noopener">Podcast</a>
+      <a href="/privacy-cookie-policy.html">Privacy &amp; Cookie Policy</a>
+      <a href="#" id="vvCookiePrefsLink">Cookie Preferences</a>
+    </div>
+  </div>
+</footer>
+
+<div id="vvCookieBanner" class="vv-cookie-banner" hidden>
+  <div class="vv-cookie-banner-inner">
+    <p class="vv-cookie-banner-text">We use analytics cookies (Google Analytics, Microsoft Clarity) only with your consent, to understand how visitors use this site. Nothing is loaded or set until you choose. See our <a href="/privacy-cookie-policy.html" style="color:inherit;text-decoration:underline;">Privacy &amp; Cookie Policy</a>.</p>
+    <div class="vv-cookie-banner-actions">
+      <button id="vvCookieReject" class="vv-cookie-btn vv-cookie-btn-secondary">Reject Non-Essential</button>
+      <button id="vvCookieAccept" class="vv-cookie-btn vv-cookie-btn-primary">Accept Analytics</button>
+    </div>
+  </div>
+</div>
+<script src="/cookie-consent.js"></script>
+<script>
+  const siteNav = document.getElementById('siteNav');
+  const siteNavMobileToggle = document.getElementById('siteNavMobileToggle');
+  const siteNavLinks = document.getElementById('siteNavLinks');
+  siteNavMobileToggle.addEventListener('click', () => {
+    const isOpen = siteNav.classList.toggle('nav-open');
+    siteNavMobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  siteNavLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      siteNav.classList.remove('nav-open');
+      siteNavMobileToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
