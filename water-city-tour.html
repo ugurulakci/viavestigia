@@ -337,6 +337,19 @@
       nav#siteNav { padding: 1.25rem 1.5rem; }
       .site-nav-links { display: none; }
       .site-nav-mobile { display: flex; }
+      /* Mobile hamburger menu: was decorative only (no listener, no menu
+         element). Reveal .site-nav-links as a dropdown via nav#siteNav.nav-open.
+         Solid var(--ink) background so text stays readable regardless of
+         nav#siteNav.scrolled state. */
+      nav#siteNav.nav-open .site-nav-links {
+        display: flex; flex-direction: column; gap: 0;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--ink); padding: 1.5rem;
+      }
+      nav#siteNav.nav-open .site-nav-links li { border-bottom: 1px solid rgba(240,234,216,.12); }
+      nav#siteNav.nav-open .site-nav-links li:last-child { border-bottom: none; }
+      nav#siteNav.nav-open .site-nav-links a { display: block; padding: .9rem 0; color: var(--gnav-ivory) !important; opacity: .85; }
+      nav#siteNav.nav-open .site-nav-links a:hover { opacity: 1; }
     }
 
     /* Push page content below the fixed global nav */
@@ -375,12 +388,12 @@
     <img src="V-logo.png" alt="Via Vestigia" class="site-nav-emblem">
     <span class="site-nav-wordmark">Via Vestigia</span>
   </a>
-  <ul class="site-nav-links">
+  <ul class="site-nav-links" id="siteNavLinks">
     <li><a href="/experiences/">Experiences</a></li>
     <li><a href="/#journal">Journal</a></li>
     <li><a href="/#founder">About</a></li>
   </ul>
-  <button class="site-nav-mobile" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button class="site-nav-mobile" id="siteNavMobileToggle" aria-label="Menu" aria-expanded="false" aria-controls="siteNavLinks"><span></span><span></span><span></span></button>
 </nav>
 
   <!-- STICKY BAR -->
@@ -644,6 +657,21 @@
     const siteNav = document.getElementById('siteNav');
     window.addEventListener('scroll', () => {
       siteNav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Mobile hamburger menu toggle (previously non-functional: no listener,
+    // no menu markup existed). Reveals #siteNavLinks via nav#siteNav.nav-open.
+    const siteNavMobileToggle = document.getElementById('siteNavMobileToggle');
+    const siteNavLinks = document.getElementById('siteNavLinks');
+    siteNavMobileToggle.addEventListener('click', () => {
+      const isOpen = siteNav.classList.toggle('nav-open');
+      siteNavMobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    siteNavLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        siteNav.classList.remove('nav-open');
+        siteNavMobileToggle.setAttribute('aria-expanded', 'false');
+      });
     });
 
     const stickyBar = document.getElementById('stickyBar');
