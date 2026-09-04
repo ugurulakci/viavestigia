@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) and Microsoft Clarity are NOT loaded here.
+     Both require explicit visitor consent -- see /cookie-consent.js,
+     loaded near the end of <body>, which injects them only after
+     Accept Analytics is clicked. -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy & Cookie Policy — Via Vestigia</title>
+  <meta name="description" content="How Via Vestigia handles personal data, analytics, cookies, and third-party services on viavestigia.com." />
+  <link rel="canonical" href="https://viavestigia.com/privacy-cookie-policy.html" />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/png" href="https://viavestigia.com/V-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600;700&family=Alegreya+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink:     #2B2420;
+      --forest:  #466D9B;
+      --stone:   #C7BBB0;
+      --ivory:   #F0EAD8;
+      --gold:    #A66C49;
+      --mist:    #E3DACB;
+      --rust:    #717F95;
+      --white:   #ffffff;
+      --f-d: 'Cormorant SC', Georgia, serif;
+      --f-b: 'Alegreya Sans', system-ui, sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--ivory); color: var(--ink); font-family: var(--f-b); font-weight: 400; overflow-x: hidden; }
+
+    nav#siteNav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 3rem;
+      background: rgba(247,244,216,.96);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 rgba(200,184,154,.25);
+    }
+    .site-nav-logo { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+    .site-nav-emblem { width: 38px; height: 38px; flex-shrink: 0; object-fit: contain; }
+    .site-nav-wordmark { font-family: var(--f-d); font-size: 1.15rem; font-weight: 500; letter-spacing: .08em; color: var(--forest); }
+    .site-nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .site-nav-links a { font-size: .78rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); opacity: .65; transition: opacity .2s; text-decoration: none; }
+    .site-nav-links a:hover { opacity: 1; }
+    .site-nav-mobile { display: none; flex-direction: column; gap: 5px; padding: 4px; background: none; border: none; cursor: pointer; }
+    .site-nav-mobile span { display: block; width: 22px; height: 1px; background: var(--ink); }
+    @media (max-width: 860px) {
+      nav#siteNav { padding: 1.25rem 1.5rem; }
+      .site-nav-links { display: none; }
+      .site-nav-mobile { display: flex; }
+      nav#siteNav.nav-open .site-nav-links {
+        display: flex; flex-direction: column; gap: 0;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--ink); padding: 1.5rem;
+      }
+      nav#siteNav.nav-open .site-nav-links li { border-bottom: 1px solid rgba(240,234,216,.12); }
+      nav#siteNav.nav-open .site-nav-links li:last-child { border-bottom: none; }
+      nav#siteNav.nav-open .site-nav-links a { display: block; padding: .9rem 0; color: var(--ivory) !important; opacity: .85; }
+      nav#siteNav.nav-open .site-nav-links a:hover { opacity: 1; }
+    }
+
+    .policy-hero { padding: 168px 48px 56px; max-width: 780px; margin: 0 auto; }
+    .policy-hero p.eyebrow { font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+    .policy-hero h1 { font-family: var(--f-d); font-size: clamp(30px, 4.5vw, 46px); font-weight: 500; color: var(--forest); line-height: 1.15; margin-bottom: 1rem; }
+    .policy-hero .updated { font-size: .85rem; color: rgba(43,36,32,.55); }
+
+    .policy-body { max-width: 780px; margin: 0 auto; padding: 0 48px 96px; font-size: 1rem; line-height: 1.75; }
+    .policy-body h2 { font-family: var(--f-d); font-size: 1.55rem; color: var(--forest); margin: 2.75rem 0 1rem; font-weight: 600; }
+    .policy-body h3 { font-size: 1.05rem; font-weight: 700; margin: 1.75rem 0 .5rem; color: var(--ink); }
+    .policy-body p { margin-bottom: 1rem; color: rgba(43,36,32,.85); }
+    .policy-body ul { margin: 0 0 1rem 1.25rem; color: rgba(43,36,32,.85); }
+    .policy-body li { margin-bottom: .4rem; }
+    .policy-body table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: .92rem; }
+    .policy-body th, .policy-body td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--mist); vertical-align: top; }
+    .policy-body th { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+    .policy-body a { color: var(--forest); }
+    .policy-body .note { background: var(--mist); padding: 1rem 1.25rem; font-size: .9rem; border-left: 3px solid var(--gold); margin: 1.25rem 0; }
+    .policy-cta-btn { display: inline-block; background: var(--gold); color: var(--ivory); text-decoration: none; padding: .8rem 1.75rem; font-size: .78rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; border: none; cursor: pointer; font-family: var(--f-b); }
+
+    footer#siteFooter { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,244,238,.6); }
+    .site-footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(247,244,238,.1); }
+    .site-footer-brand-word { color: var(--ivory); font-size: 1.2rem; display: block; margin-bottom: .75rem; font-family: var(--f-d); font-style: italic; }
+    .site-footer-brand p { font-size: .85rem; font-weight: 300; line-height: 1.7; max-width: 280px; }
+    .site-footer-col h5 { font-size: .65rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--stone); margin-bottom: 1.25rem; }
+    .site-footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .site-footer-col li a { font-size: .83rem; font-weight: 300; color: rgba(247,244,238,.55); transition: color .2s; text-decoration: none; }
+    .site-footer-col li a:hover { color: var(--ivory); }
+    .site-footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .site-footer-copy { font-size: .72rem; color: rgba(247,244,238,.3); }
+    .site-footer-social { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .site-footer-social a { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(247,244,238,.35); transition: color .2s; text-decoration: none; }
+    .site-footer-social a:hover { color: var(--stone); }
+    @media (max-width: 768px) {
+      .site-footer-top { grid-template-columns: 1fr 1fr; }
+      footer#siteFooter { padding: 3rem 24px 2rem; }
+      .policy-hero, .policy-body { padding-left: 24px; padding-right: 24px; }
+    }
+
+    /* == Cookie consent banner == */
+    .vv-cookie-banner {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 500;
+      background: var(--ink); color: var(--ivory);
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 -4px 24px rgba(0,0,0,.25);
+    }
+    .vv-cookie-banner-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; flex-wrap: wrap;
+    }
+    .vv-cookie-banner-text { font-size: .85rem; line-height: 1.6; max-width: 640px; opacity: .9; margin: 0; }
+    .vv-cookie-banner-actions { display: flex; gap: .75rem; flex-shrink: 0; }
+    .vv-cookie-btn { padding: .7rem 1.5rem; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; border: none; font-family: inherit; }
+    .vv-cookie-btn-primary { background: var(--gold); color: var(--ink); }
+    .vv-cookie-btn-secondary { background: transparent; color: var(--ivory); border: 1px solid rgba(240,234,216,.35); }
+    @media (max-width: 640px) {
+      .vv-cookie-banner-inner { flex-direction: column; align-items: stretch; }
+      .vv-cookie-banner-actions { width: 100%; }
+      .vv-cookie-btn { flex: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="siteNav" class="scrolled">
+  <a href="/" class="site-nav-logo">
+    <img src="/V-logo.png" alt="Via Vestigia" class="site-nav-emblem">
+    <span class="site-nav-wordmark">Via Vestigia</span>
+  </a>
+  <ul class="site-nav-links" id="siteNavLinks">
+    <li><a href="/experiences/">Experiences</a></li>
+    <li><a href="/#journal">Journal</a></li>
+    <li><a href="/#founder">About</a></li>
+  </ul>
+  <button class="site-nav-mobile" id="siteNavMobileToggle" aria-label="Menu" aria-expanded="false" aria-controls="siteNavLinks"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="policy-hero">
+  <p class="eyebrow">Via Vestigia</p>
+  <h1>Privacy &amp; Cookie Policy</h1>
+  <p class="updated">Last updated: September 2026 · Applies to viavestigia.com</p>
+</section>
+
+<section class="policy-body">
+
+  <p>This page explains what data viavestigia.com actually collects, why, and what choices you have. It covers this website only. Our Substack publication (viavestigia.substack.com) and Viator, which handles bookings, run under their own privacy policies — linked below.</p>
+
+  <h2>Who controls this data</h2>
+  <p>Via Vestigia is operated by Uğur M. Ulakci, a Ministry-licensed tourist guide based in Istanbul, Turkey. For any privacy question or request, contact <a href="mailto:ulakci.um@outlook.com">ulakci.um@outlook.com</a>.</p>
+
+  <h2>Analytics cookies — and your choice</h2>
+  <p>We use two analytics tools to understand how people use this site: Google Analytics (GA4) and Microsoft Clarity. Neither is loaded, and neither sets any cookie, until you actively choose "Accept Analytics" in the cookie banner shown on your first visit. If you choose "Reject Non-Essential," these tools are never loaded on your device.</p>
+
+  <table>
+    <tr><th>Service</th><th>What it does</th><th>What it collects if accepted</th></tr>
+    <tr>
+      <td>Google Analytics 4</td>
+      <td>Standard traffic and behavior analytics</td>
+      <td>Pages visited, approximate location (country/city level), device/browser type, referring site, session duration</td>
+    </tr>
+    <tr>
+      <td>Microsoft Clarity</td>
+      <td>Session recording and heatmaps, so we can see how visitors actually use the pages</td>
+      <td>Mouse movement, scroll behavior, clicks, and page interactions during your visit — recorded per session</td>
+    </tr>
+  </table>
+
+  <p>Both are configured with advertising storage permanently set to "denied" — we do not use either tool for advertising, retargeting, or ad personalization, and neither tool is used to build advertising profiles.</p>
+
+  <h3>Changing your choice later</h3>
+  <p>You can open your cookie preferences at any time using the <strong>Cookie Preferences</strong> link in the footer of any page. Choosing "Reject Non-Essential" after previously accepting clears existing analytics cookies from your browser and reloads the page.</p>
+
+  <h2>The newsletter</h2>
+  <p>The "Subscribe to the Journal" link takes you directly to our Substack subscription page. We do not collect or process your email address on viavestigia.com — you enter it on Substack's own page, under Substack's own privacy policy. See <a href="https://substack.com/privacy" target="_blank" rel="noopener">Substack's Privacy Policy</a>.</p>
+
+  <h2>Booking</h2>
+  <p>All bookings on viavestigia.com are currently completed through Viator, a third-party booking platform. When you click a "Book Now" or "Reserve" button, you leave viavestigia.com and complete your booking, including any payment and personal details, entirely on Viator's site under Viator's own privacy policy. We do not receive or store your payment information.</p>
+  <div class="note">Via Vestigia does not currently offer direct booking through this website. Some inactive booking-related code exists in the site's source for future use but is not visible or reachable by visitors, and does not collect, store, or transmit any data in its current state.</div>
+
+  <h2>Hosting</h2>
+  <p>This website is hosted on GitHub Pages (GitHub, Inc.). Basic technical access logs (such as IP address and browser type) may be retained by GitHub as part of standard hosting infrastructure, independent of the analytics tools described above. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's Privacy Statement</a>.</p>
+
+  <h2>International data transfers</h2>
+  <p>Google Analytics and Microsoft Clarity are provided by companies based in the United States, so data collected through these tools (only after you accept) may be processed outside Turkey and the EEA. Both providers maintain their own compliance frameworks for international transfers.</p>
+
+  <h2>Your rights</h2>
+  <p>Depending on where you are located, you may have rights to access, correct, delete, or object to the processing of your personal data. To exercise any of these rights, or to ask a question about this policy, contact <a href="mailto:ulakci.um@outlook.com">ulakci.um@outlook.com</a>.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>We will update this page if what the site actually collects changes — for example, if direct booking is activated, or a new analytics tool is added. The "Last updated" date at the top of this page will always reflect the most recent change.</p>
+
+  <div style="margin-top:2.5rem;">
+    <button class="policy-cta-btn" id="vvCookiePrefsButton">Manage Cookie Preferences</button>
+  </div>
+
+</section>
+
+<footer id="siteFooter">
+  <div class="site-footer-top">
+    <div class="site-footer-brand">
+      <span class="site-footer-brand-word">Via Vestigia</span>
+      <p>Intimate cultural walking experiences across Istanbul. Licensed expert guiding. Original thematic routes. Beginning in Istanbul &mdash; expanding across the Mediterranean.</p>
+    </div>
+    <div class="site-footer-col">
+      <h5>Istanbul</h5>
+      <ul>
+        <li><a href="/water-city-tour.html">The Water City</a></li>
+        <li><a href="/trace-city-tour.html">The Trace City</a></li>
+        <li><a href="/cosmopolitan-city-tour.html">The Cosmopolitan City</a></li>
+        <li><a href="/experiences/">All Experiences</a></li>
+      </ul>
+    </div>
+    <div class="site-footer-col">
+      <h5>Brand</h5>
+      <ul>
+        <li><a href="/#founder">About Via Vestigia</a></li>
+        <li><a href="/#journal">Journal</a></li>
+        <li><a href="/#vision">Mediterranean Vision</a></li>
+      </ul>
+    </div>
+    <div class="site-footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:ulakci.um@outlook.com">ulakci.um@outlook.com</a></li>
+        <li><a href="https://wa.me/905393815229" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/ugurulakci/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://viavestigia.substack.com" target="_blank" rel="noopener">Substack</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer-bottom">
+    <p class="site-footer-copy">&copy; 2026 Via Vestigia. Istanbul, Turkey. Ministry-Licensed Cultural Tour Guide &middot; Licence No. 013366</p>
+    <div class="site-footer-social">
+      <a href="https://www.instagram.com/ugurulakci/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://viavestigia.substack.com" target="_blank" rel="noopener">Substack</a>
+      <a href="https://open.spotify.com/show/4RaCXmtT1FOKo59qqtcegl?si=PHJ2MhqwSjaEUDXN1jdHjA" target="_blank" rel="noopener">Podcast</a>
+      <a href="/privacy-cookie-policy.html">Privacy &amp; Cookie Policy</a>
+      <a href="#" id="vvCookiePrefsLink">Cookie Preferences</a>
+    </div>
+  </div>
+</footer>
+
+<div id="vvCookieBanner" class="vv-cookie-banner" hidden>
+  <div class="vv-cookie-banner-inner">
+    <p class="vv-cookie-banner-text">We use analytics cookies (Google Analytics, Microsoft Clarity) only with your consent, to understand how visitors use this site. Nothing is loaded or set until you choose.</p>
+    <div class="vv-cookie-banner-actions">
+      <button id="vvCookieReject" class="vv-cookie-btn vv-cookie-btn-secondary">Reject Non-Essential</button>
+      <button id="vvCookieAccept" class="vv-cookie-btn vv-cookie-btn-primary">Accept Analytics</button>
+    </div>
+  </div>
+</div>
+<script src="/cookie-consent.js"></script>
+<script>
+  // Second trigger on this page only: the in-body "Manage Cookie Preferences"
+  // button does the same thing as the footer link.
+  document.getElementById('vvCookiePrefsButton').addEventListener('click', function () {
+    document.getElementById('vvCookieBanner').hidden = false;
+  });
+  const siteNav = document.getElementById('siteNav');
+  const siteNavMobileToggle = document.getElementById('siteNavMobileToggle');
+  const siteNavLinks = document.getElementById('siteNavLinks');
+  siteNavMobileToggle.addEventListener('click', () => {
+    const isOpen = siteNav.classList.toggle('nav-open');
+    siteNavMobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  siteNavLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      siteNav.classList.remove('nav-open');
+      siteNavMobileToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
