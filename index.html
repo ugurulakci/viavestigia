@@ -341,7 +341,7 @@ nav .nav-wordmark, nav .nav-links a { color: var(--ivory); transition: color .4s
 /* Compact discovery-gateway override for the reconciled Experiences teaser
    (scoped to .experiences only — base .section padding stays untouched
    for every other section on the page). */
-.experiences.section { padding: 3.5rem 3rem; }
+.experiences.section { padding: 2.75rem 3rem; }
 .experiences .exp-header { margin-bottom: 1.75rem; }
 .experiences .exp-teaser-cta { text-align: left; margin-top: .5rem; }
 .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
@@ -668,6 +668,15 @@ footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,2
   .footer-brand { grid-column: 1 / -1; }
   .vision-map { grid-template-columns: repeat(4, 1fr); }
   .booking-form-row { grid-template-columns: 1fr; }
+  /* Mobile-only: hero city-marker/map overlay overlaps the headline on narrow
+     viewports. Desktop rendering (.hero-map-dots / .hero-map-dots.visible
+     above) is untouched. */
+  .hero-map-dots { display: none; }
+  /* Mobile-only: Water City Duration/Group size/Pricing was a cramped 3-up
+     flex row causing "Pricing" to wrap badly. 2+1 grid instead; desktop
+     .flagship-meta flex rule above is untouched. */
+  .flagship-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 1rem; }
+  .flagship-meta-item:nth-child(3) { grid-column: 1 / -1; }
 }
 @media (max-width: 600px) {
   .hero-headline { font-size: 2.6rem; }
@@ -793,7 +802,6 @@ footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,2
       <h2 class="flagship-title">The Water City<br>Cisterns, Aqueducts<br>& Hammam</h2>
       <p class="flagship-story">Beneath Istanbul's skyline lies a water system that kept Constantinople alive for 1,500 years. This isn't a tour of monuments. It's a reading of the city's veins — underground, above the streets, in places most itineraries skip.</p>
       <div class="flagship-stops">
-        <div class="flagship-stop"><strong>Basilica Cistern</strong> exterior — the scale that set an empire</div>
         <div class="flagship-stop"><strong>Underground cistern</strong> — a surviving part of the city's historic water network</div>
         <div class="flagship-stop"><strong>Çemberlitaş Hamamı</strong> — Mimar Sinan, 1584</div>
         <div class="flagship-stop"><strong>Grand Bazaar</strong> — Ottoman bath culture, still traded</div>
