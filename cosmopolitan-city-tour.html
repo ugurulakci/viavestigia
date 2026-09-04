@@ -388,7 +388,7 @@
   <!-- STICKY BAR -->
   <div class="sticky-bar" id="stickyBar">
     <span class="sticky-bar-text">Istanbul: The Cosmopolitan City</span>
-    <a href="https://www.viator.com/tours/Istanbul/Istanbul-Beyond-the-Galata-Tower-Non-Touristy-Walking-Tour/d585-5512166P2" target="_blank" rel="noopener" class="btn-book">Book Now →</a>
+    <a href="https://www.viator.com/tours/Istanbul/Istanbul-Beyond-the-Galata-Tower-Non-Touristy-Walking-Tour/d585-5512166P2" target="_blank" rel="noopener" class="btn-book" data-location="sticky_bar">Book Now →</a>
   </div>
 
   <!-- HERO -->
@@ -415,7 +415,7 @@
       </div>
       <div class="hero-price">Check current price <span>on Viator</span></div>
       <div class="hero-cta">
-        <a href="https://www.viator.com/tours/Istanbul/Istanbul-Beyond-the-Galata-Tower-Non-Touristy-Walking-Tour/d585-5512166P2" target="_blank" rel="noopener" class="btn-book">Book Now on Viator →</a>
+        <a href="https://www.viator.com/tours/Istanbul/Istanbul-Beyond-the-Galata-Tower-Non-Touristy-Walking-Tour/d585-5512166P2" target="_blank" rel="noopener" class="btn-book" data-location="hero">Book Now on Viator →</a>
         <a href="#itinerary" class="btn-secondary">See what's included ↓</a>
       </div>
     </div>
@@ -562,7 +562,7 @@
       <p class="section-label">Ready to Cross the District?</p>
       <h2>Galata, Read Through<br>the Communities<br><em>That Shaped It.</em></h2>
       <p>Small groups are limited to a maximum of 12 guests, allowing for conversation and a more personal pace throughout the walk.</p>
-      <a href="https://www.viator.com/tours/Istanbul/Istanbul-Beyond-the-Galata-Tower-Non-Touristy-Walking-Tour/d585-5512166P2" target="_blank" rel="noopener" class="btn-book">Reserve Your Spot on Viator →</a>
+      <a href="https://www.viator.com/tours/Istanbul/Istanbul-Beyond-the-Galata-Tower-Non-Touristy-Walking-Tour/d585-5512166P2" target="_blank" rel="noopener" class="btn-book" data-location="final_cta">Reserve Your Spot on Viator →</a>
       <p class="availability-note">Secure payment · Free cancellation · Instant confirmation</p>
     </div>
   </section>
@@ -670,6 +670,25 @@
       el.style.transform = 'translateY(20px)';
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
       fadeObs.observe(el);
+    });
+  
+    // GA4 Viator outbound click tracking (Measurement Plan v1).
+    // Fires only when analytics consent is currently accepted -- reuses
+    // cookie-consent.js's own consent state as the single source of truth,
+    // rather than inferring from whether gtag happens to exist.
+    // Links use target="_blank" (new tab, no page unload), so a plain
+    // synchronous gtag call is safe -- no preventDefault/delay needed.
+    const VV_EXPERIENCE_NAME = 'cosmopolitan_city';
+    document.querySelectorAll('a[data-location]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (window.vvConsentAccepted && window.vvConsentAccepted() && window.gtag) {
+          gtag('event', 'viator_outbound_click', {
+            experience_name: VV_EXPERIENCE_NAME,
+            link_location: link.dataset.location,
+            link_url: link.href
+          });
+        }
+      });
     });
   </script>
 
