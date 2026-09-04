@@ -1,22 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Microsoft Clarity -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "y5qrv95a45");
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KWJCM7ZM31"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-KWJCM7ZM31');
-</script>
+<!-- Google Analytics (GA4) and Microsoft Clarity are NOT loaded here.
+     Both require explicit visitor consent -- see /cookie-consent.js,
+     loaded near the end of <body>, which injects them only after
+     Accept Analytics is clicked. -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Experiences in Istanbul — Via Vestigia</title>
@@ -101,6 +89,29 @@
       nav#siteNav.nav-open .site-nav-links li:last-child { border-bottom: none; }
       nav#siteNav.nav-open .site-nav-links a { display: block; padding: .9rem 0; color: var(--ivory) !important; opacity: .85; }
       nav#siteNav.nav-open .site-nav-links a:hover { opacity: 1; }
+    }
+
+    /* == Cookie consent banner == */
+    .vv-cookie-banner {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 500;
+      background: var(--ink); color: var(--ivory);
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 -4px 24px rgba(0,0,0,.25);
+    }
+    .vv-cookie-banner-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; flex-wrap: wrap;
+    }
+    .vv-cookie-banner-text { font-size: .85rem; line-height: 1.6; max-width: 640px; opacity: .9; margin: 0; }
+    .vv-cookie-banner-actions { display: flex; gap: .75rem; flex-shrink: 0; }
+    .vv-cookie-btn { padding: .7rem 1.5rem; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; border: none; font-family: inherit; }
+    .vv-cookie-btn-primary { background: var(--gold); color: var(--ink); }
+    .vv-cookie-btn-secondary { background: transparent; color: var(--ivory); border: 1px solid rgba(240,234,216,.35); }
+    @media (max-width: 640px) {
+      .vv-cookie-banner-inner { flex-direction: column; align-items: stretch; }
+      .vv-cookie-banner-actions { width: 100%; }
+      .vv-cookie-btn { flex: 1; }
     }
 
     /* ══ HUB HERO — intentionally small, not a manifesto ══ */
@@ -306,9 +317,22 @@
       <a href="https://www.instagram.com/ugurulakci/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://viavestigia.substack.com" target="_blank" rel="noopener">Substack</a>
       <a href="https://open.spotify.com/show/4RaCXmtT1FOKo59qqtcegl?si=PHJ2MhqwSjaEUDXN1jdHjA" target="_blank" rel="noopener">Podcast</a>
+      <a href="/privacy-cookie-policy.html">Privacy &amp; Cookie Policy</a>
+      <a href="#" id="vvCookiePrefsLink">Cookie Preferences</a>
     </div>
   </div>
 </footer>
+
+<div id="vvCookieBanner" class="vv-cookie-banner" hidden>
+  <div class="vv-cookie-banner-inner">
+    <p class="vv-cookie-banner-text">We use analytics cookies (Google Analytics, Microsoft Clarity) only with your consent, to understand how visitors use this site. Nothing is loaded or set until you choose. See our <a href="/privacy-cookie-policy.html" style="color:inherit;text-decoration:underline;">Privacy &amp; Cookie Policy</a>.</p>
+    <div class="vv-cookie-banner-actions">
+      <button id="vvCookieReject" class="vv-cookie-btn vv-cookie-btn-secondary">Reject Non-Essential</button>
+      <button id="vvCookieAccept" class="vv-cookie-btn vv-cookie-btn-primary">Accept Analytics</button>
+    </div>
+  </div>
+</div>
+<script src="/cookie-consent.js"></script>
 
 <!-- No scroll-based nav JS needed: this page has no full-bleed hero image,
      so #siteNav stays permanently in its opaque "scrolled" state (set via
