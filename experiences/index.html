@@ -194,6 +194,9 @@
     @media (max-width: 768px) {
       .site-footer-top { grid-template-columns: 1fr 1fr; }
       footer#siteFooter { padding: 3rem 24px 2rem; }
+      /* Mobile-only: bottom utility row had no flex-wrap, causing horizontal
+         overflow on narrow viewports. Desktop .site-footer-social above is untouched. */
+      .site-footer-social { flex-wrap: wrap; }
     }
   </style>
 </head>
