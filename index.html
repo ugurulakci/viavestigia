@@ -682,6 +682,10 @@ footer { background: var(--forest); padding: 4.5rem 3rem 2rem; color: rgba(247,2
   .journal-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
   .footer-brand { grid-column: 1 / -1; }
+  /* Mobile-only: bottom utility row (Instagram/Substack/Podcast/Privacy/
+     Cookie Preferences) had no flex-wrap, causing horizontal overflow on
+     narrow viewports. Desktop .footer-social above is untouched. */
+  .footer-social { flex-wrap: wrap; }
   .vision-map { grid-template-columns: repeat(4, 1fr); }
   .booking-form-row { grid-template-columns: 1fr; }
   /* Mobile-only: hero city-marker/map overlay overlaps the headline on narrow
